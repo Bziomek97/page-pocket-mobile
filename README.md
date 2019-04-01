@@ -10,8 +10,8 @@ PagePocket is application to store bookmarks and pages in more organised way. It
 1st Step: Open terminal/command line. </br>
 2nd Step: Clone repository: `git clone https://github.com/Bziomek97/page-pocket-mobile.git` </br>
 3rd Step: Go to directory:
- - Linux/macOS: `cd PagePocketMobile`
- - Windows: `cd \? ?:\PagePocketMobile`
+ - Linux/macOS: `cd page-pocket-mobile`
+ - Windows: `cd \? ?:\page-pocket-mobile`
 
 4th Step: Install missing dependeries: `npm install` </br>
 5th Step: Run application: `npm start`
