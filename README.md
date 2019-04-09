@@ -22,6 +22,9 @@ Download application from Google Store: `Expo`. Past installation you must open 
 ### Run on iOS
 This is more simpler than Android. You must only to do, it`s scan QR code to run.
 
+### Routing
+Information about routing, you can find in `How to routing` file.
+
 Useful Links'n'Tips for Developers
 ======
 This is some useful Links and tips to make this project great again:
