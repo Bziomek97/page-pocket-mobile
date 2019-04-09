@@ -1,0 +1,5 @@
+1. Create new js file
+2. Add to AppNavigator.js:
+  -> import <screenName> from '<file>'
+  -> in createStackNavigator: nameOfScreen: {screen: <screenName>, ... }
+3. Add button (or something interact with onPress) with method : this.props.navigation.navigate('<nameOfScreen>') and add to ReactComponent this -> <Props>
