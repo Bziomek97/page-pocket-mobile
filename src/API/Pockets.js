@@ -1,7 +1,30 @@
-import React from 'react';
-
 const addr = 'localhost:8013';
 const url = `http://${addr}/api/pockets`;
+
+// Response handler
+let responseHandle = response => {
+    if(response.status === 401) {
+        console.log
+        return Promise.reject(response);
+    }
+    switch (response.status) {
+        case 204:
+            console.log("Deleted bookmark")
+            return;
+        case 401:
+            console.log("Unauthorized access");
+            break;
+        case 404:
+            console.log("Page not found");
+            break;
+        case 409:
+            console.log("Email exist");
+            break;
+        default:
+            return response.json();
+    }
+    return Promise.reject(response);
+}
 
 // Function to handle saving bookmark for logged user
 let postBookmark = () => {
@@ -11,7 +34,7 @@ let postBookmark = () => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-
+            //?
         }),
     }).catch(error => console.log(error));
 }
@@ -27,7 +50,7 @@ let getBookmarks = () => {
 
         }),
     })
-    .then(response => response.json())
+    .then(response => responseHandle(response))
     .then(response => console.log(response)) //test
     .catch(error => console.log(error));
 }
@@ -40,7 +63,7 @@ let getSpecificBookmark = item => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-
+                //?
         }),
     }).catch(error => console.log(error));
 }
@@ -49,5 +72,7 @@ let getSpecificBookmark = item => {
 let deleteBookmark = item => {
     fetch(url+'/'+item,{
         method: 'DELETE',
-    }).catch(error => console.log(error));
+    })
+    .then(response => responseHandle(response))
+    .catch(error => console.log(error));
 }
