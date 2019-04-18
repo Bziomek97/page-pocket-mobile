@@ -2,41 +2,37 @@ import React from 'react';
 
 const url= 'http://localhost:8013/api/users/';
 
-let register = () => {
+let register = state => {
     fetch(url+'register',{
         method: 'POST',
         header: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-
-        }),
+        body: JSON.stringify(state),
     }).catch(error => console.log(error));
 }
 
-let login = () => {
+let login = state => {
     fetch(url+'login',{
         method: 'POST',
         header: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-
-        }),
+        body: JSON.stringify(state),
     })
     .then(response => response.json())
     .then(response => console.log(response)) //test
     .catch(error => console.log(error));
 }
 
-let logout = () => {
+let logout = sessionId => {
     fetch(url+'logout',{
         method: 'POST',
         header: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-
+            "_Id": sessionId,
         }),
     }).catch(error => console.log(error));
 }
