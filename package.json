@@ -8,6 +8,7 @@
     "postinstall": "react-native-port-patcher --new-port 8088"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "expo": "^32.0.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
