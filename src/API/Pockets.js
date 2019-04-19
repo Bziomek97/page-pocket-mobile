@@ -27,28 +27,24 @@ let responseHandle = response => {
 }
 
 // Function to handle saving bookmark for logged user
-let postBookmark = () => {
+let postBookmark = state => {
     fetch(url,{
         method: 'POST',
         header: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-            //?
-        }),
+        body: JSON.stringify(state),
     }).catch(error => console.log(error));
 }
 
 // Function to handle show all bookmarks for logged user
-let getBookmarks = () => {
+let getBookmarks = state => {
     fetch(url,{
         method: 'GET',
         header: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-
-        }),
+        body: JSON.stringify(state),
     })
     .then(response => responseHandle(response))
     .then(response => console.log(response)) //test
@@ -63,9 +59,11 @@ let getSpecificBookmark = item => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-                //?
+                'item': item,
         }),
-    }).catch(error => console.log(error));
+    })
+    .then(response => responseHandle(response))
+    .catch(error => console.log(error));
 }
 
 // Function to handle delete bookmark for logged user
