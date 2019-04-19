@@ -16,12 +16,17 @@ export var register = state => {
 
 // Function to handle user login
 export var login = state => {
+    let info;
     axios.post(url+'login',{
         header: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(state),
-    }).catch(error => responseHandle(error));
+    })
+    .then(response => info = response)
+    .catch(error => responseHandle(error));
+
+    return info;
 }
 
 // Function to handle user logout

@@ -8,6 +8,7 @@ import axios from 'axios';
 export var postBookmark = state => {
     axios.post(url,{
         header: {
+            Accept: 'application/json',
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(state),
@@ -19,6 +20,7 @@ export var getBookmarks = () => {
     var bookmarks = [];
     return axios.get(url,{
         header: {
+            Accept: 'application/json',
             'Content-Type': 'application/json',
         }
     })
@@ -33,6 +35,7 @@ export var getSpecificBookmark = item => {
     let bookmark;
     axios.get(url+'/'+item,{
         header: {
+            Accept: 'application/json',
             'Content-Type': 'application/json',
         },
     })
