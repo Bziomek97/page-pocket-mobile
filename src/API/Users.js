@@ -5,7 +5,7 @@ import responseHandle from './ResponseHandler';
 import axios from 'axios';
 
 // Function to handle user registration
-export var register = state => {
+export const register = state => {
     axios.post(url+'register',{
         header: {
             'Content-Type': 'application/json',
@@ -15,7 +15,7 @@ export var register = state => {
 }
 
 // Function to handle user login
-export var login = state => {
+export const login = state => {
     let info;
     axios.post(url+'login',{
         header: {
@@ -30,7 +30,8 @@ export var login = state => {
 }
 
 // Function to handle user logout
-export var logout = sessionId => {
+export const logout = sessionId => {
+    let result;
     axios.post(url+'logout',{
         header: {
             'Content-Type': 'application/json',
@@ -38,5 +39,9 @@ export var logout = sessionId => {
         body: JSON.stringify({
             "_Id": sessionId,
         }),
-    }).catch(error => responseHandle(error));
+    })
+    .then(response => result=response )
+    .catch(error => responseHandle(error));
+
+    return response;  
 }

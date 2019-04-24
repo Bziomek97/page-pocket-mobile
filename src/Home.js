@@ -1,12 +1,17 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Alert} from 'react-native';
 
+import {getBookmarks, getBookmark} from './API/Pockets';
+
+
+
 export default class App extends React.Component<Props> {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.contentTxt}>Main Screen</Text>
         <Button onPress={() => {this.props.navigation.navigate('SecondScreen')}} title="Go to 2nd screen" />
+        <Button onPress={() => {getBookmarks()}} title="Test button" />
       </View>
     );
   }

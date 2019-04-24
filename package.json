@@ -17,6 +17,5 @@
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"
   },
-  "private": true,
-  "proxy": "http://localhost:8013/api"
+  "private": true
 }
