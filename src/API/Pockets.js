@@ -2,16 +2,11 @@ import { Constants } from 'expo';
 import responseHandle from './ResponseHandler.js';
 import axios from 'axios';
 
-const { manifest } = Constants;
-const api = (typeof manifest.packagerOpts === `object`) && manifest.packagerOpts.dev
-  ? manifest.debuggerHost.split(`:`).shift().concat(`:8013`)
-  : `127.0.0.1:8013`;
-
-  const url = `http://10.0.2.2:8013/api/pockets`;
+  const baseUrl = `http://serveo.net:8013/api/pockets`;
 
 // Function to handle saving bookmark for logged user
 export const postBookmark = state => {
-    axios.post(url,{
+    axios.post(baseUrl,{
         header: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
@@ -26,29 +21,32 @@ export const postBookmark = state => {
 export const getBookmarks = () => {
     let bookmarks;
 
-    axios.get(url)
-    .then(response => console.log(response))
-    .catch(error => responseHandle(error));
+    axios.get(baseUrl)
+    .then(response => console.log(JSON.stringify(response)))
+    .catch(error => esponseHandle(error));
 
+    console.log(bookmarks);
     return bookmarks;
 }
 
 // Function to handle return specified bookmark for logged user
 export const getSpecificBookmark = item => {
     let bookmark;
-    axios.get(url+'/'+item,{
+
+    bookmark = axios.get(baseUrl+'/'+item,{
         header: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
         },
     })
-    .then(response => bookmark = response)
     .catch(error => responseHandle(error));
+
+    console.log(bookmark);
 
     return bookmark;
 }
 
 // Function to handle delete bookmark for logged user
 export const deleteBookmark = item => {
-    axios.delete(url+'/'+item).catch(error => responseHandle(error));
+    axios.delete(baseUrl+'/'+item).catch(error => responseHandle(error));
 }

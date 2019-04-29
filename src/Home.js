@@ -11,6 +11,8 @@ export default class App extends React.Component<Props> {
       <View style={styles.container}>
         <Text style={styles.contentTxt}>Main Screen</Text>
         <Button onPress={() => {this.props.navigation.navigate('SecondScreen')}} title="Go to 2nd screen" />
+
+        <Text style={styles.contentTxt}>Press button below</Text>
         <Button onPress={() => {getBookmarks()}} title="Test button" />
       </View>
     );
