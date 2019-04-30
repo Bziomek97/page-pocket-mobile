@@ -1,5 +1,6 @@
 import responseHandle from './ResponseHandler';
 import axios from 'axios';
+import session from  '../session'
 
 const baseUrl = `http://serveo.net:8013/api/users`;
 
@@ -31,7 +32,7 @@ export const logout = async (sessionID) => {
         const response = await axios.post(`${baseUrl}/logout`,{
             "Cookie": sessionID
         });
-        return response.data;
+        session.clearSession();
     }
     catch (error) {
         responseHandle(error);
