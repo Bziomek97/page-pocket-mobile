@@ -16,6 +16,10 @@ PagePocket is application to store bookmarks and pages in more organised way. It
 4th Step: Install missing dependeries: `npm install` </br>
 5th Step: Run application: `npm start`
 
+
+### Tunneling
+In order to use api you must tunneling `127.0.0.1:8013` into something like `serveo.net:8013` input this command into terminal: `ssh -R 8013:127.0.0.1:8013 serveo.net`
+
 ### Run on Android
 Download application from Google Store: `Expo`. Past installation you must open this app and select option to scan QR code or type address manually.
 

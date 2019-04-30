@@ -4,7 +4,7 @@ import SecondScreen from './src/SecondPage';
 
 const AppNavigator = createStackNavigator({
   Home: { screen: Home },
-  SecondScreen: {screen: SecondScreen}
+  SecondScreen: {screen: SecondScreen},
 });
 
 export default createAppContainer(AppNavigator);
