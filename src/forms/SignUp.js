@@ -1,33 +1,64 @@
 import React from 'react'
 import {
     View,
-    Button,
-    TextInput,
     Text,
-    StyleSheet
+    TextInput,
+    TouchableHighlight,
+    StyleSheet,
+    Alert
 } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { register } from '../API/Users';
+import session from '../session';
 
-export default class SignUp extends React.Component {
+export default class SignUp extends React.Component<Props> {
+
+    static navigationOptions = ({ navigation }) => ({
+        title: 'Registration',
+    });
+
     state = {
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: ''
+        data: {
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+        },
+        confirmPassw: '',
+    };
+
+    onValid = () => {
+        const passw = this.state.data.password;
+        const cpassw = this.state.confirmPassw;
+        const email = this.state.data.email;
+
+        if (passw === undefined || passw === '' || cpassw === undefined || cpassw === '' ) throw {message: "Hasło lub jego potwierdzenie jest wymagane" };
+
+        if (passw.localeCompare(cpassw) !== 0) throw {message: "Hasła muszą być podobne do siebie" };
+
+        const emailRegex = /((\w|\.)+)@(\w+)(\.\w{2,3}){1,}/;
+
+        if(!(email.match(emailRegex))) throw {message: "Podany mail jest nieprawidlowy"};
+
     };
 
     onChangeText = (key, val) => {
-        this.setState({ [key]: val })
+        if(key === 'confirmPassw') this.setState({[key]: val});
+        else this.setState({ data: { ...this.state.data ,[key]: val }});
     };
 
     signUp = async () => {
-        const { firstName, lastName, email, password } = this.state
         try {
+            this.onValid();
             // here place your signup logic
-            console.log('user successfully signed up!: ', success)
+            const response = await register(this.state.data);
+            session.saveSessionId(response);
+            Alert.alert('Success of registration');
         } catch (err) {
-            console.log('error signing up: ', err)
+            Alert.alert(err.message);
+            return;
         }
+        this.props.navigation.navigate('Home');
     };
 
     render() {
@@ -37,7 +68,6 @@ export default class SignUp extends React.Component {
                 style={styles.container}
             >
                 <View>
-                    <Text style={styles.text}> Sign Up!</Text>
                     <TextInput
                         style={styles.input}
                         placeholder='Imie'
@@ -68,15 +98,29 @@ export default class SignUp extends React.Component {
                         placeholderTextColor='darkgrey'
                         onChangeText={val => this.onChangeText('password', val)}
                     />
-                    <Button
-                        title='Sign Up'
-                        onPress={this.signUp}
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Potwierdz Hasło'
+                        secureTextEntry={true}
+                        autoCapitalize="none"
+                        placeholderTextColor='darkgrey'
+                        onChangeText={val => this.onChangeText('confirmPassw', val)}
                     />
+                    <TouchableHighlight style={styles.button} onPress = {this.signUp}>
+                        <Text style={styles.buttonTxt}>Press Me</Text>
+                    </TouchableHighlight>
                 </View>
             </KeyboardAwareScrollView>)
     }
 }
 
+/*
+                    <Button
+                        title='Sign Up'
+                        style = {styles.button}
+                        onPress={this.signUp}
+                    />
+ */
 const styles = StyleSheet.create({
     text: {
         color:  'white',
@@ -86,18 +130,33 @@ const styles = StyleSheet.create({
         margin: 16,
     },
     input: {
+        alignItems: 'center',
         color:  'white',
         height: 50,
-        width: 350,
         fontSize: 18,
         borderBottomWidth: 2,
         borderBottomColor: 'darkgrey',
         margin: 16,
     },
+    button: {
+        marginTop: 16,
+        backgroundColor: '#9a9a9a',
+        height: 50,
+        width: '90%',
+        left: 16,
+        alignItems: 'center',
+    },
+    buttonTxt: {
+        color:  'white',
+        height: 50,
+        width: 150,
+        fontSize: 18,
+        margin: 16,
+        textAlign: 'center',
+    },
     container: {
         backgroundColor: '#000033',
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+        flex: 0.8,
+        justifyContent: 'flex-start',
     }
 });
