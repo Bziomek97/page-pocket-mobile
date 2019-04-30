@@ -1,8 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Alert} from 'react-native';
-import { getBookmarks } from './API/Pockets';
+import { getBookmark } from './API/Pockets';
 
 export default class App extends React.Component<Props> {
+
+  static async getData() {
+    const data = await getBookmark();
+    console.log(data);
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -10,7 +16,7 @@ export default class App extends React.Component<Props> {
         <Button onPress={() => {this.props.navigation.navigate('SecondScreen')}} title="Go to 2nd screen" />
 
         <Text style={styles.contentTxt}>Press button below</Text>
-        <Button onPress={() => {getBookmarks()}} title="Test button" />
+        <Button onPress={() => App.getData()} title="Test button" />
       </View>
     );
   }
