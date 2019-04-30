@@ -3,7 +3,7 @@ import {Alert} from 'react-native'
 // Response handler
 export default function responseHandle(error){
 
-    if(error.response == undefined){
+    if(error.response === undefined){
         Alert.alert('[ERROR] ' + error.message);
         return;
     }

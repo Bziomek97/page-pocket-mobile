@@ -1,47 +1,39 @@
-const addr = 'localhost:8013';
-const url = `http://${addr}/api/users`;
-
 import responseHandle from './ResponseHandler';
 import axios from 'axios';
 
+const baseUrl = `http://serveo.net:8013/api/users`;
+
 // Function to handle user registration
-export const register = state => {
-    axios.post(url+'register',{
-        header: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(state),
-    }).catch(error => responseHandle(error));
-}
+export const register = async (state) => {
+    try{
+        const response = await axios.post(`${baseUrl}/register`,state)
+        return response.data;
+    }
+    catch (error) {
+        responseHandle(error);
+    }
+};
 
 // Function to handle user login
-export const login = state => {
-    let info;
-    axios.post(url+'login',{
-        header: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(state),
-    })
-    .then(response => info = response)
-    .catch(error => responseHandle(error));
-
-    return info;
-}
+export const login = async (state) => {
+    try{
+        const response = await axios.post(`${baseUrl}/login`,state)
+        return response.data;
+    }
+    catch (error) {
+        responseHandle(error);
+    }
+};
 
 // Function to handle user logout
-export const logout = sessionId => {
-    let result;
-    axios.post(url+'logout',{
-        header: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            "_Id": sessionId,
-        }),
-    })
-    .then(response => result=response )
-    .catch(error => responseHandle(error));
-
-    return response;  
-}
+export const logout = async (sessionID) => {
+    try{
+        const response = await axios.post(`${baseUrl}/logout`,{
+            "Cookie": sessionID
+        });
+        return response.data;
+    }
+    catch (error) {
+        responseHandle(error);
+    }
+};
