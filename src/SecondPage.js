@@ -14,7 +14,8 @@ export default class App extends React.Component<Props> {
     return (
       <View style={styles.container}>
         <Text style={styles.contentTxt}>2nd Screen</Text>
-        <Button onPress={() => {this.props.navigation.navigate('Home')}} title="Go to home screen" />        
+        <Button onPress={() => {this.props.navigation.navigate('Home')}} title="Go to home screen" />
+        <Button onPress={() => {this.props.navigation.navigate('Login')}} title="Go to login screen" />
         <Button onPress={() => {App.getData()}} title="Try me" style='top: 10px;' />
       </View>
     );

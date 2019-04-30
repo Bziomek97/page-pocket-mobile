@@ -23,6 +23,7 @@ export const login = async (state) => {
     }
     catch (error) {
         responseHandle(error);
+        return Promise.reject();
     }
 };
 

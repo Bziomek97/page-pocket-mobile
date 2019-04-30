@@ -1,3 +1,4 @@
+import 'localstorage-polyfill'
 const SESSION_ID_KEY = `SESSIONID`;
 
 export default {
