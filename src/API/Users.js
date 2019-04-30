@@ -12,6 +12,7 @@ export const register = async (state) => {
     }
     catch (error) {
         responseHandle(error);
+        return Promise.reject();
     }
 };
 
@@ -36,5 +37,6 @@ export const logout = async (sessionID) => {
     }
     catch (error) {
         responseHandle(error);
+        return Promise.reject();
     }
 };
