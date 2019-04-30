@@ -1,9 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Alert} from 'react-native';
-
-import {getBookmarks, getBookmark} from './API/Pockets';
-
-
+import { getBookmarks } from './API/Pockets';
 
 export default class App extends React.Component<Props> {
   render() {
