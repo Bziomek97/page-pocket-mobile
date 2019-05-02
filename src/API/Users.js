@@ -7,11 +7,12 @@ const baseUrl = `http://serveo.net:8013/api/users`;
 // Function to handle user registration
 export const register = async (state) => {
     try{
-        const response = await axios.post(`${baseUrl}/register`,state)
+        const response = await axios.post(`${baseUrl}/register`,state);
         return response.data;
     }
     catch (error) {
         responseHandle(error);
+        return Promise.reject();
     }
 };
 
@@ -37,5 +38,6 @@ export const logout = async (sessionID) => {
     }
     catch (error) {
         responseHandle(error);
+        return Promise.reject();
     }
 };

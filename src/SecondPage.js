@@ -15,8 +15,9 @@ export default class App extends React.Component<Props> {
       <View style={styles.container}>
         <Text style={styles.contentTxt}>2nd Screen</Text>
         <Button onPress={() => {this.props.navigation.navigate('Home')}} title="Go to home screen" />
+        <Button onPress={() => {this.props.navigation.navigate('Register')}} title="Go to register screen" />
         <Button onPress={() => {this.props.navigation.navigate('Login')}} title="Go to login screen" />
-        <Button onPress={() => {App.getData()}} title="Try me" style='top: 10px;' />
+        <Button onPress={() => {App.getData()}} title="Try me" />
       </View>
     );
   }
@@ -31,6 +32,6 @@ const styles = StyleSheet.create({
   },
   contentTxt: {
     fontSize: 25,
-    marginBottom: 8,
+    marginTop: 25,
   },
 });
