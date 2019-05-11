@@ -1,5 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Alert} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  Alert,
+  ImageBackground
+} from 'react-native';
+
 import { getBookmark } from './API/Pockets';
 
 export default class App extends React.Component<Props> {
@@ -11,13 +19,21 @@ export default class App extends React.Component<Props> {
 
   render() {
     return (
+
+        <ImageBackground
+            source={require("../public/materials/background.jpg")}
+            style={{width: '100%', height: '100%'}}
+        >
+
       <View style={styles.container}>
         <Text style={styles.contentTxt}>Main Screen</Text>
-        <Button onPress={() => {this.props.navigation.navigate('SecondScreen')}} title="Go to 2nd screen" />
+        <Button onPress={() => {this.props.navigation.navigate('SecondScreen')}} title="Change Screen" />
 
         <Text style={styles.contentTxt}>Press button below</Text>
         <Button onPress={() => App.getData()} title="Test button" />
       </View>
+
+        </ImageBackground>
     );
   }
 }
@@ -25,7 +41,6 @@ export default class App extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -33,4 +48,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginBottom: 8,
   },
+
+
+
 });
