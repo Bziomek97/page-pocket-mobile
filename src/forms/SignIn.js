@@ -5,6 +5,7 @@ import {
     TextInput,
     TouchableHighlight,
     StyleSheet,
+    ImageBackground,
     Alert
 } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -30,7 +31,7 @@ export default class SignIn extends React.Component<Props> {
 
         const emailRegex = /((\w|\.)+)@(\w+)(\.\w{2,3}){1,}/;
 
-        if(!(email.match(emailRegex))) throw {message: "Podany mail jest nieprawidlowy"};
+        if(!(email.match(emailRegex))) throw {message: "Wrong E-mail"};
 
     };
 
@@ -53,12 +54,20 @@ export default class SignIn extends React.Component<Props> {
     };
 
     render() {
+
         return(
+
+            <ImageBackground
+                source={require("../../public/materials/background.jpg")}
+                style={{width: '100%', height: '100%'}}
+            >
+
             <KeyboardAwareScrollView
                 enableOnAndroid = 'true'
                 style={styles.container}
             >
                 <View>
+
                     <TextInput
                         style={styles.input}
                         placeholder='E-mail'
@@ -79,7 +88,10 @@ export default class SignIn extends React.Component<Props> {
                         <Text style={styles.buttonTxt}>Login</Text>
                     </TouchableHighlight>
                 </View>
-            </KeyboardAwareScrollView>)
+
+            </KeyboardAwareScrollView>
+
+            </ImageBackground>)
     }
 }
 
@@ -108,11 +120,13 @@ const styles = StyleSheet.create({
         margin: 16,
     },
     button: {
+        position: 'absolute', left: '50%',
         marginTop: 16,
         backgroundColor: '#9a9a9a',
         height: 50,
-        width: '90%',
-        left: 16,
+        width: '75%',
+        opacity: 0.5,
+        borderRadius: 50,
         alignItems: 'center',
     },
     buttonTxt: {
@@ -123,8 +137,10 @@ const styles = StyleSheet.create({
         margin: 16,
         textAlign: 'center',
     },
+
     container: {
-        backgroundColor: '#000033',
+        height: '100%',
+        width: '100%',
         flex: 0.8,
         justifyContent: 'flex-start',
     }
