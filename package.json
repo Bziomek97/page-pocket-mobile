@@ -19,7 +19,8 @@
     "react-native-material-bottom-navigation": "^1.0.3",
     "react-native-paper": "^2.15.2",
     "react-navigation": "^3.6.1",
-    "react-navigation-material-bottom-tabs": "^1.0.0"
+    "react-navigation-material-bottom-tabs": "^1.0.0",
+    "react-native-vector-icons": "latest"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"

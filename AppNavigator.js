@@ -6,12 +6,10 @@ import SignIn from './src/forms/SignIn';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
+
 const HomeStack = createStackNavigator(
     {
       Home: { screen: Home },
-      SecondScreen: {screen: SecondScreen},
-      Register: {screen: SignUp},
-      Login: { screen: SignIn },
     },
     {
       //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
@@ -29,7 +27,6 @@ const HomeStack = createStackNavigator(
 
 const SearchStack = createStackNavigator(
     {
-      Register: {screen: SignUp},
       Login: { screen: SignIn },
     },
     {
@@ -48,10 +45,7 @@ const SearchStack = createStackNavigator(
 
 const ProfileStack = createStackNavigator(
     {
-        Home: { screen: Profile },
-        SecondScreen: {screen: SecondScreen},
         Register: {screen: SignUp},
-        Login: { screen: SignIn },
     },
     {
         //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
@@ -61,7 +55,7 @@ const ProfileStack = createStackNavigator(
                 backgroundColor: '#778899',
             },
             headerTintColor: '#FFFFFF',
-            title: 'Home',
+            title: 'Profile',
             //Header title
         },
     }
@@ -70,6 +64,7 @@ const App = createBottomTabNavigator(
     {
       Home: { screen: HomeStack },
       Search: { screen: SearchStack },
+      Profile: {screen: ProfileStack},
     },
     {
       defaultNavigationOptions: ({ navigation }) => ({
@@ -77,17 +72,31 @@ const App = createBottomTabNavigator(
           const { routeName } = navigation.state;
           let IconComponent = Ionicons;
           let iconName;
+
           if (routeName === 'Home') {
             iconName = `ios-home`;
           } else if (routeName === 'Search') {
             iconName = `ios-search`;
           }
+          else if (routeName === 'Profile') {
+              iconName = `ios-person`;
+          }
+
           return <IconComponent name={iconName} size={25} color={tintColor} />;
         },
       }),
       tabBarOptions: {
         activeTintColor: '#008B8B',
         inactiveTintColor: 'gray',
+          style: {
+              backgroundColor: 'transparent',
+              borderTopWidth: 0,
+              position: 'absolute',
+              left: 40,
+              right: 40,
+              bottom: 10,
+          },
+
       },
     }
 );
