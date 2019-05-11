@@ -7,7 +7,6 @@ import {
   Alert,
   ImageBackground
 } from 'react-native';
-
 import { getBookmark } from './API/Pockets';
 
 export default class App extends React.Component<Props> {
