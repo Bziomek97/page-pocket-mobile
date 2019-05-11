@@ -5,6 +5,7 @@ import {
     TextInput,
     TouchableHighlight,
     StyleSheet,
+    ImageBackground,
     Alert
 } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -34,11 +35,11 @@ export default class SignUp extends React.Component<Props> {
 
         if (passw === undefined || passw === '' || cpassw === undefined || cpassw === '' ) throw {message: "Hasło lub jego potwierdzenie jest wymagane" };
 
-        if (passw.localeCompare(cpassw) !== 0) throw {message: "Hasła muszą być podobne do siebie" };
+        if (passw.localeCompare(cpassw) !== 0) throw {message: "Passwords have to be identical" };
 
         const emailRegex = /((\w|\.)+)@(\w+)(\.\w{2,3}){1,}/;
 
-        if(!(email.match(emailRegex))) throw {message: "Podany mail jest nieprawidlowy"};
+        if(!(email.match(emailRegex))) throw {message: "Wrong E-mail"};
 
     };
 
@@ -62,7 +63,14 @@ export default class SignUp extends React.Component<Props> {
     };
 
     render() {
+
         return(
+
+            <ImageBackground
+                source={require("../../public/materials/background.jpg")}
+                style={{width: '100%', height: '100%'}}
+            >
+
             <KeyboardAwareScrollView
                 enableOnAndroid = 'true'
                 style={styles.container}
@@ -110,7 +118,9 @@ export default class SignUp extends React.Component<Props> {
                         <Text style={styles.buttonTxt}>Press Me</Text>
                     </TouchableHighlight>
                 </View>
-            </KeyboardAwareScrollView>)
+            </KeyboardAwareScrollView>
+
+            </ImageBackground>)
     }
 }
 
@@ -155,7 +165,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     container: {
-        backgroundColor: '#000033',
+        height: '100%',
+        width: '100%',
         flex: 0.8,
         justifyContent: 'flex-start',
     }
