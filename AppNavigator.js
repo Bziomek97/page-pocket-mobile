@@ -16,11 +16,7 @@ const HomeStack = createStackNavigator(
     {
       //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
       defaultNavigationOptions: {
-        //Header customization of the perticular Screen
-        headerStyle: {
-          backgroundColor: '#778899',
-        },
-        headerTintColor: '#FFFFFF',
+        
         title: 'Home',
         //Header title
       },
@@ -34,8 +30,6 @@ const SearchStack = createStackNavigator(
     {
       //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
       defaultNavigationOptions: {
-
-        headerColor: '#FFFFFF',
         title: 'Favorite',
         //Header title
       },
@@ -49,11 +43,7 @@ const ProfileStack = createStackNavigator(
     {
         //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
         defaultNavigationOptions: {
-            //Header customization of the perticular Screen
-            headerStyle: {
-                backgroundColor: '#778899',
-            },
-            headerTintColor: '#FFFFFF',
+
             title: 'Profile',
             //Header title
         },
@@ -84,12 +74,13 @@ const App = createMaterialBottomTabNavigator(
           return <IconComponent name={iconName} size={25} color={tintColor} />;
         },
       }),
-        activeColor: 'blue',
-        inactiveColor: 'gray',
+        initialRoute: 'Home',
+        activeColor: '#003300',
+        inactiveColor: 'white',
         barStyle:{
-            backgroundColor: 'transparent',
-            position: 'absolute',
-        },
+         backgroundColor: 'rgba(154,154,154,0.5)',
+        position:'absolute',
+         },
 
 
 

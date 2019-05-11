@@ -121,7 +121,6 @@ const styles = StyleSheet.create({
     },
     button: {
         position: 'absolute', left: '50%',
-        transform: 'translate(-50%, -50%)',
         marginTop: 16,
         backgroundColor: '#9a9a9a',
         height: 50,
