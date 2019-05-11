@@ -18,7 +18,7 @@ const HomeStack = createStackNavigator(
       defaultNavigationOptions: {
         //Header customization of the perticular Screen
         headerStyle: {
-          backgroundColor: '#42f44b',
+          backgroundColor: '#778899',
         },
         headerTintColor: '#FFFFFF',
         title: 'Home',
@@ -27,7 +27,7 @@ const HomeStack = createStackNavigator(
     }
 );
 
-const SettingsStack = createStackNavigator(
+const SearchStack = createStackNavigator(
     {
       Register: {screen: SignUp},
       Login: { screen: SignIn },
@@ -37,19 +37,39 @@ const SettingsStack = createStackNavigator(
       defaultNavigationOptions: {
         //Header customization of the perticular Screen
         headerStyle: {
-          backgroundColor: '#42f44b',
+          backgroundColor: '#778899',
         },
         headerTintColor: '#FFFFFF',
-        title: 'Settings',
+        title: 'Favorite',
         //Header title
       },
     }
 );
 
+const ProfileStack = createStackNavigator(
+    {
+        Home: { screen: Profile },
+        SecondScreen: {screen: SecondScreen},
+        Register: {screen: SignUp},
+        Login: { screen: SignIn },
+    },
+    {
+        //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
+        defaultNavigationOptions: {
+            //Header customization of the perticular Screen
+            headerStyle: {
+                backgroundColor: '#778899',
+            },
+            headerTintColor: '#FFFFFF',
+            title: 'Home',
+            //Header title
+        },
+    }
+);
 const App = createBottomTabNavigator(
     {
       Home: { screen: HomeStack },
-      Settings: { screen: SettingsStack },
+      Search: { screen: SearchStack },
     },
     {
       defaultNavigationOptions: ({ navigation }) => ({
@@ -58,15 +78,15 @@ const App = createBottomTabNavigator(
           let IconComponent = Ionicons;
           let iconName;
           if (routeName === 'Home') {
-            iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-          } else if (routeName === 'Settings') {
-            iconName = `ios-checkmark-circle${focused ? '' : '-outline'}`;
+            iconName = `ios-home`;
+          } else if (routeName === 'Search') {
+            iconName = `ios-search`;
           }
           return <IconComponent name={iconName} size={25} color={tintColor} />;
         },
       }),
       tabBarOptions: {
-        activeTintColor: '#42f44b',
+        activeTintColor: '#008B8B',
         inactiveTintColor: 'gray',
       },
     }
