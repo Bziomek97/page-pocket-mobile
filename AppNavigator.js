@@ -4,7 +4,9 @@ import SecondScreen from './src/SecondPage'
 import SignUp from './src/forms/SignUp';
 import SignIn from './src/forms/SignIn';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom-tabs";
+
 
 
 const HomeStack = createStackNavigator(
@@ -32,11 +34,8 @@ const SearchStack = createStackNavigator(
     {
       //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
       defaultNavigationOptions: {
-        //Header customization of the perticular Screen
-        headerStyle: {
-          backgroundColor: '#778899',
-        },
-        headerTintColor: '#FFFFFF',
+
+        headerColor: '#FFFFFF',
         title: 'Favorite',
         //Header title
       },
@@ -60,7 +59,7 @@ const ProfileStack = createStackNavigator(
         },
     }
 );
-const App = createBottomTabNavigator(
+const App = createMaterialBottomTabNavigator(
     {
       Home: { screen: HomeStack },
       Search: { screen: SearchStack },
@@ -85,19 +84,25 @@ const App = createBottomTabNavigator(
           return <IconComponent name={iconName} size={25} color={tintColor} />;
         },
       }),
-      tabBarOptions: {
-        activeTintColor: '#008B8B',
-        inactiveTintColor: 'gray',
-          style: {
-              backgroundColor: 'transparent',
-              borderTopWidth: 0,
-              position: 'absolute',
-              left: 40,
-              right: 40,
-              bottom: 10,
-          },
+        activeColor: 'blue',
+        inactiveColor: 'gray',
+        barStyle:{
+            backgroundColor: 'transparent',
+            position: 'absolute',
+        },
 
-      },
+
+
+          // style: {
+          //     backgroundColor: 'transparent',
+          //     borderTopWidth: 0,
+          //     position: 'absolute',
+          //     left: 40,
+          //     right: 40,
+          //     bottom: 10,
+          // },
+
+
     }
 );
 //For React Navigation 2.+ need to export App only
