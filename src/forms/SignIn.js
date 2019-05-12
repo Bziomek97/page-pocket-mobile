@@ -11,6 +11,8 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { login } from '../API/Users';
 import session from '../session';
+// import { Text, View, StyleSheet } from 'react-native';
+//import { Constants } from 'expo';
 
 export default class SignIn extends React.Component<Props> {
 
@@ -78,12 +80,14 @@ export default class SignIn extends React.Component<Props> {
                     />
                     <TextInput
                         style={styles.input}
-                        placeholder='Hasło'
+                        placeholder='Password'
                         secureTextEntry={true}
                         autoCapitalize="none"
                         placeholderTextColor='darkgrey'
                         onChangeText={val => this.onChangeText('password', val)}
                     />
+
+
                     <TouchableHighlight style={styles.button} onPress = {this.signUp}>
                         <Text style={styles.buttonTxt}>Login</Text>
                     </TouchableHighlight>
@@ -104,45 +108,49 @@ export default class SignIn extends React.Component<Props> {
  */
 const styles = StyleSheet.create({
     text: {
-        color:  'white',
+        color:  'black',
         height: 50,
         width: 350,
-        fontSize: 18,
-        margin: 16,
+        fontSize: 20,
+        margin: 14,
     },
     input: {
         alignItems: 'center',
-        color:  'white',
-        height: 50,
-        fontSize: 18,
-        borderBottomWidth: 2,
-        borderBottomColor: 'darkgrey',
-        margin: 16,
+        color:  'black',
+        backgroundColor: 'rgba(154,154,154, 0.7)',
+        height: 60,
+        width: 500, //500
+        fontSize: 20,
+//        borderBottomWidth: 2,
+//        borderBottomColor: 'darkgrey',
+        margin: 14,
+        borderRadius: 50,
+        textAlign: 'center',
     },
     button: {
-        position: 'absolute', left: '50%',
-        transform: 'translate(-50%, -50%)',
-        marginTop: 16,
+        marginTop: 50,
         backgroundColor: '#9a9a9a',
         height: 50,
-        width: '75%',
-        opacity: 0.5,
+        width: 150,
+        left: '65%',
         borderRadius: 50,
-        alignItems: 'center',
     },
     buttonTxt: {
-        color:  'white',
+        color:  'black',
         height: 50,
-        width: 150,
+        //width: 150,
         fontSize: 18,
         margin: 16,
         textAlign: 'center',
     },
-
+//    fixedRatio: {
+//        backgroundColor: 'rebeccapurple',
+//        flex: 1,
+//        aspectRatio: 1
+//    },
     container: {
-        height: '100%',
-        width: '100%',
-        flex: 0.8,
-        justifyContent: 'flex-start',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 });
