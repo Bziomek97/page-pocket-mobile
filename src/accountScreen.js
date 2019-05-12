@@ -7,28 +7,51 @@ import {
     StyleSheet,
     Alert
 } from 'react-native';
-import logout from './API/Users'
+import { logout } from './API/Users'
 import { isLogged , clearSession, getSessionId, saveSessionId} from './session'
 
 export default class AccountScreen extends React.Component<Props> {
+
+    constructor(props) {
+        super(props);
+        this._update();
+    }
+
+    componentDidUpdate() {
+        this._update();
+    }
+
+    componentDidMount() {
+        this._update();
+    }
 
     static navigationOptions = ({ navigation }) => ({
         title: 'Account',
     });
 
     state = {
-        profile: {},
+        listItem: [{key: 'Login'}, {key: 'Register'}],
+        profile: {}
     };
 
     listItem = {
         Register: 'SignUp',
         Login: 'SignIn',
         Logout: 'Logout',
-
+        Home: 'Home',
     }
 
     _onPress = (item) => {
-        this.props.navigation.navigate(this.listItem[item.key]);
+        console.log(this.state);
+        getSessionId().then(response => console.log(response))
+        if(item.key === 'Logout') {
+            logout().then(clearSession())
+            .then(this.props.navigation.navigate('Home'));
+        }
+        else {
+
+            this.props.navigation.navigate(this.listItem[item.key]);
+        }
     }
 
     _renderItem = ({item}) => {
@@ -39,13 +62,25 @@ export default class AccountScreen extends React.Component<Props> {
         </TouchableOpacity>);
     }
 
+    _update = () => {
+        var resVal;
+        isLogged().then(response => {
+        if(response)  this.setState({listItem: [{key: 'Logout'}]});
+        else this.setState({listItem: [{key: 'Login'}, {key: 'Register'}]})
+        });
+    }
+
+    _profile = () => {
+        
+    }
+
     render() {
         return(
         <ImageBackground source={require("../public/materials/background.jpg")}
         style={styles.container}>
                 <FlatList
                     //Lista elementow
-                    data={[{key: 'Login'}, {key: 'Register'}]}
+                    data={this.state.listItem}
                     //Co ma renderowac
                     renderItem={this._renderItem}
                 />

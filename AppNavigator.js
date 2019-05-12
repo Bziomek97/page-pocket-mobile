@@ -45,7 +45,7 @@ const ProfileStack = createStackNavigator(
     {
         //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
         defaultNavigationOptions: {
-
+            initialRoute: 'AccountScreen',
             title: 'Profile',
             //Header title
         },

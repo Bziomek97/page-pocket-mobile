@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { login } from '../API/Users';
-import session from '../session';
+import { saveSessionId } from '../session';
 
 export default class SignIn extends React.Component<Props> {
 
@@ -45,7 +45,7 @@ export default class SignIn extends React.Component<Props> {
             this.onValid();
             // here place your signup logic
             const response = await login(this.state);
-            session.saveSessionId(response);
+            saveSessionId(response);
             Alert.alert('Success of login');
             this.props.navigation.navigate('Home');
         } catch (err) {

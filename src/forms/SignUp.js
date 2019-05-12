@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { register } from '../API/Users';
-import session from '../session';
+import { saveSessionId } from '../session';
 
 export default class SignUp extends React.Component<Props> {
 
@@ -54,7 +54,7 @@ export default class SignUp extends React.Component<Props> {
             this.onValid();
             // here place your signup logic
             const response = await register(this.state.data);
-            session.saveSessionId(response);
+            saveSessionId(response);
             Alert.alert('Success of registration');
         } catch (err) {
             Alert.alert(err.message);
