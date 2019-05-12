@@ -5,28 +5,39 @@ import {
     TextInput,
     TouchableHighlight,
     StyleSheet,
-    ImageBackground,
     Alert
 } from 'react-native'
+import { TagInput } from 'react-native-tag-input';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 import { register } from '../API/Users';
 import session from '../session';
+import {AutoGrowingTextInput} from 'react-native-autogrow-textinput';
 
-export default class SignUp extends React.Component<Props> {
+const inputProps = {
+    keyboardType: 'default',
+    placeholder: 'email',
+    autoFocus: true,
+    style: {
+        fontSize: 14,
+        marginVertical: Platform.OS == 'ios' ? 10 : -2,
+    },
+};
+
+export default class AddBookmark extends React.Component<Props> {
 
     static navigationOptions = ({ navigation }) => ({
-        title: 'Registration',
-        tabBarVisible: 'false',
+        title: 'Add bookmark',
     });
 
     state = {
         data: {
-            firstName: '',
-            lastName: '',
+            name: '',
+            link: '',
             email: '',
-            password: '',
+            tags: [],
         },
-        confirmPassw: '',
+        text: '',
     };
 
     onValid = () => {
@@ -36,11 +47,11 @@ export default class SignUp extends React.Component<Props> {
 
         if (passw === undefined || passw === '' || cpassw === undefined || cpassw === '' ) throw {message: "Hasło lub jego potwierdzenie jest wymagane" };
 
-        if (passw.localeCompare(cpassw) !== 0) throw {message: "Passwords have to be identical" };
+        if (passw.localeCompare(cpassw) !== 0) throw {message: "Hasła muszą być podobne do siebie" };
 
         const emailRegex = /((\w|\.)+)@(\w+)(\.\w{2,3}){1,}/;
 
-        if(!(email.match(emailRegex))) throw {message: "Wrong E-mail"};
+        if(!(email.match(emailRegex))) throw {message: "Podany mail jest nieprawidlowy"};
 
     };
 
@@ -64,14 +75,7 @@ export default class SignUp extends React.Component<Props> {
     };
 
     render() {
-
         return(
-
-            <ImageBackground
-                source={require("../../public/materials/background.jpg")}
-                style={{width: '100%', height: '100%'}}
-            >
-
             <KeyboardAwareScrollView
                 enableOnAndroid = 'true'
                 style={styles.container}
@@ -79,49 +83,39 @@ export default class SignUp extends React.Component<Props> {
                 <View>
                     <TextInput
                         style={styles.input}
-                        placeholder='Imie'
+                        placeholder='Name of bookmark'
                         autoCapitalize="none"
                         placeholderTextColor='darkgrey'
-                        onChangeText={val => this.onChangeText('firstName', val)}
+                        onChangeText={val => this.onChangeText('name', val)}
                     />
                     <TextInput
                         style={styles.input}
-                        placeholder='Nazwisko'
+                        placeholder='Link'
                         autoCapitalize="none"
                         placeholderTextColor='darkgrey'
-                        onChangeText={val => this.onChangeText('lastName', val)}
+                        onChangeText={val => this.onChangeText('link', val)}
                     />
-                    <TextInput
-                        style={styles.input}
-                        placeholder='E-mail'
-                        textContentType='emailAddress'
-                        autoCapitalize="none"
-                        placeholderTextColor='darkgrey'
-                        onChangeText={val => this.onChangeText('email', val)}
-                    />
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Hasło'
-                        secureTextEntry={true}
-                        autoCapitalize="none"
-                        placeholderTextColor='darkgrey'
-                        onChangeText={val => this.onChangeText('password', val)}
-                    />
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Potwierdz Hasło'
-                        secureTextEntry={true}
-                        autoCapitalize="none"
-                        placeholderTextColor='darkgrey'
-                        onChangeText={val => this.onChangeText('confirmPassw', val)}
-                    />
-                    <TouchableHighlight style={styles.button} onPress = {this.signUp}>
-                        <Text style={styles.buttonTxt}>Press Me</Text>
+                    <TagInput
+                        value={this.state.data.tags}
+                        onChange={this.onChangeTags}
+                        labelExtractor={(tag) => tag}
+                        text={this.state.text}
+                        onChangeText={val => this.onChangeText('tags', val)}
+                        tagColor="blue"
+                        tagTextColor="white"
+                        inputProps={inputProps}
+                        maxHeight={75}/>
+                    <AutoGrowingTextInput style={styles.input}
+                                          placeholder={'Description'}
+                                          autoCapitalize="none"
+                                          placeholderTextColor='darkgrey'
+                                          onChangeText={val => this.onChangeText('description', val)}/>
+                    <TouchableHighlight style={styles.button}
+                                        onPress = {this.signUp}>
+                        <Text style={styles.buttonTxt}>Add Me</Text>
                     </TouchableHighlight>
                 </View>
-            </KeyboardAwareScrollView>
-
-            </ImageBackground>)
+            </KeyboardAwareScrollView>)
     }
 }
 
@@ -166,8 +160,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     container: {
-        height: '100%',
-        width: '100%',
+        backgroundColor: '#000033',
         flex: 0.8,
         justifyContent: 'flex-start',
     }

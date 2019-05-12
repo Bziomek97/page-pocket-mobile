@@ -1,6 +1,6 @@
 import React from 'react';
 import Home from './src/Home';
-import SecondScreen from './src/SecondPage'
+import AccountScreen from './src/accountScreen'
 import SignUp from './src/forms/SignUp';
 import SignIn from './src/forms/SignIn';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -38,7 +38,9 @@ const SearchStack = createStackNavigator(
 
 const ProfileStack = createStackNavigator(
     {
-        Register: {screen: SignUp},
+        AccountScreen: {screen: AccountScreen},
+        SignIn: { screen: SignIn },
+        SignUp: { screen: SignUp },
     },
     {
         //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions

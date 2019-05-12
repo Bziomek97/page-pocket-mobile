@@ -16,6 +16,7 @@ export default class SignIn extends React.Component<Props> {
 
     static navigationOptions = ({ navigation }) => ({
         title: 'Login',
+        headerBottom: null,
     });
 
     state = {
