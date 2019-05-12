@@ -118,21 +118,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         color:  'black',
         backgroundColor: 'rgba(154,154,154, 0.7)',
-        height: 60,
-        width: 500, //500
+        height: 50,
         fontSize: 20,
-//        borderBottomWidth: 2,
-//        borderBottomColor: 'darkgrey',
         margin: 14,
         borderRadius: 50,
         textAlign: 'center',
     },
     button: {
-        marginTop: 50,
+        marginTop: 16,
         backgroundColor: '#9a9a9a',
         height: 50,
-        width: 150,
-        left: '65%',
+        width: '40%',
+        left: '50%',
         borderRadius: 50,
     },
     buttonTxt: {
@@ -150,7 +147,8 @@ const styles = StyleSheet.create({
 //    },
     container: {
         flex: 1,
+        width: '100%',
         justifyContent: 'center',
-        alignItems: 'center',
+//        alignItems: 'center',
     }
 });

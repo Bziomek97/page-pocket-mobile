@@ -78,14 +78,14 @@ export default class SignUp extends React.Component<Props> {
                 <View>
                     <TextInput
                         style={styles.input}
-                        placeholder='Imie'
+                        placeholder='Name'
                         autoCapitalize="none"
                         placeholderTextColor='darkgrey'
                         onChangeText={val => this.onChangeText('firstName', val)}
                     />
                     <TextInput
                         style={styles.input}
-                        placeholder='Nazwisko'
+                        placeholder='Surname'
                         autoCapitalize="none"
                         placeholderTextColor='darkgrey'
                         onChangeText={val => this.onChangeText('lastName', val)}
@@ -100,7 +100,7 @@ export default class SignUp extends React.Component<Props> {
                     />
                     <TextInput
                         style={styles.input}
-                        placeholder='Hasło'
+                        placeholder='Password'
                         secureTextEntry={true}
                         autoCapitalize="none"
                         placeholderTextColor='darkgrey'
@@ -108,14 +108,14 @@ export default class SignUp extends React.Component<Props> {
                     />
                     <TextInput
                         style={styles.input}
-                        placeholder='Potwierdz Hasło'
+                        placeholder='Repeate Password'
                         secureTextEntry={true}
                         autoCapitalize="none"
                         placeholderTextColor='darkgrey'
                         onChangeText={val => this.onChangeText('confirmPassw', val)}
                     />
                     <TouchableHighlight style={styles.button} onPress = {this.signUp}>
-                        <Text style={styles.buttonTxt}>Press Me</Text>
+                        <Text style={styles.buttonTxt}>Registrate</Text>
                     </TouchableHighlight>
                 </View>
             </KeyboardAwareScrollView>
@@ -142,32 +142,38 @@ const styles = StyleSheet.create({
     input: {
         alignItems: 'center',
         color:  'white',
-        height: 50,
+        backgroundColor: 'rgba(154,154,154, 0.7)',
+        height: 40,
         fontSize: 18,
-        borderBottomWidth: 2,
-        borderBottomColor: 'darkgrey',
-        margin: 16,
+        borderRadius: 50,
+        marginHorizontal: 24,
+        marginVertical: 10,
+        textAlign: 'center',
     },
     button: {
         marginTop: 16,
         backgroundColor: '#9a9a9a',
-        height: 50,
-        width: '90%',
-        left: 16,
+        height: 40,
+        width: '40%',
+        left: '55%',
         alignItems: 'center',
+        borderRadius: 50,
     },
     buttonTxt: {
         color:  'white',
-        height: 50,
+        height: 40,
         width: 150,
         fontSize: 18,
-        margin: 16,
+        marginHorizontal: 16,
+        marginVertical: 8,
         textAlign: 'center',
     },
     container: {
         height: '100%',
         width: '100%',
         flex: 0.8,
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
+//        alignItems: 'center',
+        //justifyContent: 'flex-start',
     }
 });
