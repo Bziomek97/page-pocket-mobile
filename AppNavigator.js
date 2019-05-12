@@ -4,7 +4,7 @@ import AccountScreen from './src/accountScreen'
 import SignUp from './src/forms/SignUp';
 import SignIn from './src/forms/SignIn';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
 import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom-tabs";
 
 
@@ -51,6 +51,19 @@ const ProfileStack = createStackNavigator(
         },
     }
 );
+
+ProfileStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+  };
+};
+
+
 const App = createMaterialBottomTabNavigator(
     {
       Home: { screen: HomeStack },
@@ -82,6 +95,7 @@ const App = createMaterialBottomTabNavigator(
         barStyle:{
          backgroundColor: 'rgba(154,154,154,0.5)',
         position:'absolute',
+        tabBarVisible: false,
          },
 
 

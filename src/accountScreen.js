@@ -42,14 +42,11 @@ export default class AccountScreen extends React.Component<Props> {
     }
 
     _onPress = (item) => {
-        console.log(this.state);
-        getSessionId().then(response => console.log(response))
         if(item.key === 'Logout') {
             logout().then(clearSession())
             .then(this.props.navigation.navigate('Home'));
         }
         else {
-
             this.props.navigation.navigate(this.listItem[item.key]);
         }
     }

@@ -16,7 +16,7 @@ export default class SignUp extends React.Component<Props> {
 
     static navigationOptions = ({ navigation }) => ({
         title: 'Registration',
-        tabBarVisible: 'false',
+        
     });
 
     state = {
