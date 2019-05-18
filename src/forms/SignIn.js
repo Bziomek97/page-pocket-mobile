@@ -6,13 +6,18 @@ import {
     TouchableHighlight,
     StyleSheet,
     ImageBackground,
+    Dimensions,
     Alert
 } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { login } from '../API/Users';
 import session from '../session';
+import { LinearGradient } from 'expo';
 // import { Text, View, StyleSheet } from 'react-native';
 //import { Constants } from 'expo';
+
+var height = Dimensions.get('window').height;
+var width = Dimensions.get('window').width;
 
 export default class SignIn extends React.Component<Props> {
 
@@ -68,8 +73,13 @@ export default class SignIn extends React.Component<Props> {
                 enableOnAndroid = 'true'
                 style={styles.container}
             >
-                <View>
 
+                <View style={styles.gradient}>
+                    <LinearGradient
+                        colors={['rgba(255,255,255,0.2)', 'rgba(255,255,255,0)']}>
+
+                <View>
+                    <Text style={styles.Txt}>Sign In</Text>
                     <TextInput
                         style={styles.input}
                         placeholder='E-mail'
@@ -86,11 +96,14 @@ export default class SignIn extends React.Component<Props> {
                         placeholderTextColor='darkgrey'
                         onChangeText={val => this.onChangeText('password', val)}
                     />
+                </View>
 
 
                     <TouchableHighlight style={styles.button} onPress = {this.signUp}>
                         <Text style={styles.buttonTxt}>Login</Text>
                     </TouchableHighlight>
+
+                    </LinearGradient>
                 </View>
 
             </KeyboardAwareScrollView>
@@ -116,28 +129,39 @@ const styles = StyleSheet.create({
     },
     input: {
         alignItems: 'center',
-        color:  'black',
-        backgroundColor: 'rgba(154,154,154, 0.7)',
-        height: 50,
-        fontSize: 20,
-        margin: 14,
+        color:  'white',
+        backgroundColor: 'rgba(154,154,154, 0.8)',
+        height: height*0.04,
+        fontSize: 18,
         borderRadius: 50,
+        marginHorizontal: '8%',
+        marginVertical: 10,
         textAlign: 'center',
     },
     button: {
-        marginTop: 16,
+        marginTop: 32,
+        marginBottom: 64,
         backgroundColor: '#9a9a9a',
-        height: 50,
+        height: height*0.04,
         width: '40%',
-        left: '50%',
+        left: '52%',
+        alignItems: 'center',
+        justifyContent: 'center',
         borderRadius: 50,
     },
     buttonTxt: {
-        color:  'black',
-        height: 50,
-        //width: 150,
+        color:  'white',
         fontSize: 18,
-        margin: 16,
+        textAlign: 'center',
+    },
+    Txt: {
+        color:  'white',
+        fontWeight: "bold",
+        height: height*0.08,
+        fontSize: height*0.06,
+        marginTop: 12,
+        marginBottom: 25,
+        marginVertical: 20,
         textAlign: 'center',
     },
 //    fixedRatio: {
@@ -145,10 +169,18 @@ const styles = StyleSheet.create({
 //        flex: 1,
 //        aspectRatio: 1
 //    },
+    gradient: {
+        width: width*0.9,
+        height: height*0.7,
+        borderWidth: 5,
+        borderRadius: 15,
+        borderStyle: 'solid',
+        borderColor: 'rgba(255,255,255)',
+    },
     container: {
-        flex: 1,
-        width: '100%',
+        flex: 10,
+        alignItems: 'center',
         justifyContent: 'center',
-//        alignItems: 'center',
+        marginBottom: '10%',
     }
 });

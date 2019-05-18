@@ -173,14 +173,13 @@ const styles = StyleSheet.create({
         width: '40%',
         left: '52%',
         alignItems: 'center',
+        justifyContent: 'center',
         borderRadius: 50,
     },
     buttonTxt: {
         color:  'white',
         fontSize: 18,
         textAlign: 'center',
-        justifyContent: 'center',
-        alignItems: 'center',
     },
     Txt: {
         color:  'white',
