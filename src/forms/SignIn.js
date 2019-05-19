@@ -11,13 +11,13 @@ import {
 } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { login } from '../API/Users';
-import session from '../session';
 import { LinearGradient } from 'expo';
 // import { Text, View, StyleSheet } from 'react-native';
 //import { Constants } from 'expo';
 
 var height = Dimensions.get('window').height;
 var width = Dimensions.get('window').width;
+import { saveSessionId } from '../session';
 
 export default class SignIn extends React.Component<Props> {
 
@@ -51,7 +51,7 @@ export default class SignIn extends React.Component<Props> {
             this.onValid();
             // here place your signup logic
             const response = await login(this.state);
-            session.saveSessionId(response);
+            saveSessionId(response);
             Alert.alert('Success of login');
             this.props.navigation.navigate('Home');
         } catch (err) {
@@ -112,13 +112,6 @@ export default class SignIn extends React.Component<Props> {
     }
 }
 
-/*
-                    <Button
-                        title='Sign Up'
-                        style = {styles.button}
-                        onPress={this.signUp}
-                    />
- */
 const styles = StyleSheet.create({
     text: {
         color:  'black',

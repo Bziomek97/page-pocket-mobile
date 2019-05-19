@@ -1,13 +1,14 @@
 import React from 'react';
 import Home from './src/Home';
-import SecondScreen from './src/SecondPage'
+import AccountScreen from './src/accountScreen'
 import SignUp from './src/forms/SignUp';
 import SignIn from './src/forms/SignIn';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
 import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom-tabs";
 
-
+//Background Color
+const bgColor = '#1a1a1a';
 
 const HomeStack = createStackNavigator(
     {
@@ -19,6 +20,10 @@ const HomeStack = createStackNavigator(
         
         title: 'Home',
         //Header title
+        headerStyle: {
+          backgroundColor: bgColor,
+        },
+        headerTintColor: 'white',
       },
     }
 );
@@ -30,26 +35,49 @@ const SearchStack = createStackNavigator(
     {
       //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
       defaultNavigationOptions: {
-        title: 'Favorite',
+        title: 'Search',
         //Header title
+        headerStyle: {
+          backgroundColor: bgColor,
+        },
+        headerTintColor: 'white',
       },
     }
 );
 
 const ProfileStack = createStackNavigator(
     {
-        Register: {screen: SignUp},
+        AccountScreen: {screen: AccountScreen},
+        SignIn: { screen: SignIn },
+        SignUp: { screen: SignUp },
     },
     {
         //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
         defaultNavigationOptions: {
-
-            title: 'Profile',
+            initialRoute: 'AccountScreen',
+            title: 'Account Settings',
             //Header title
+        headerStyle: {
+          backgroundColor: bgColor,
+        },
+        headerTintColor: 'white',
         },
     }
 );
-const App = createMaterialBottomTabNavigator(
+
+ProfileStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+  };
+};
+
+
+/*const App = createMaterialBottomTabNavigator(
     {
       Home: { screen: HomeStack },
       Search: { screen: SearchStack },
@@ -80,6 +108,7 @@ const App = createMaterialBottomTabNavigator(
         barStyle:{
          backgroundColor: 'rgba(154,154,154,0.5)',
         position:'absolute',
+        tabBarVisible: false,
          },
 
 
@@ -95,7 +124,48 @@ const App = createMaterialBottomTabNavigator(
 
 
     }
+);*/
+
+const App = createBottomTabNavigator(
+  {
+    Home: { screen: HomeStack },
+    Search: { screen: SearchStack },
+    Profile: {screen: ProfileStack},
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        const { routeName } = navigation.state;
+        let IconComponent = Ionicons;
+        let iconName;
+
+        if (routeName === 'Home') {
+          iconName = `ios-home`;
+        } else if (routeName === 'Search') {
+          iconName = `ios-search`;
+        }
+        else if (routeName === 'Profile') {
+            iconName = `ios-person`;
+        }
+
+        return <IconComponent name={iconName} size={25} color={tintColor} />;
+      },
+    }),
+      initialRoute: 'Home',
+      tabBarOptions:{
+        activeTintColor: '#057302',
+        inactiveTintColor: 'white',
+      
+        style: {
+          backgroundColor: bgColor,
+          borderColor: "transparent",
+        },
+    },
+
+
+  }
 );
+
 //For React Navigation 2.+ need to export App only
 //export default App;
 //For React Navigation 3.+

@@ -11,16 +11,17 @@ import {
 } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { register } from '../API/Users';
-import session from '../session';
 import { LinearGradient } from 'expo';
 
 var height = Dimensions.get('window').height;
 var width = Dimensions.get('window').width;
+import { saveSessionId } from '../session';
 
 export default class SignUp extends React.Component<Props> {
 
     static navigationOptions = ({ navigation }) => ({
         title: 'Registration',
+        
     });
 
     state = {
@@ -58,7 +59,7 @@ export default class SignUp extends React.Component<Props> {
             this.onValid();
             // here place your signup logic
             const response = await register(this.state.data);
-            session.saveSessionId(response);
+            saveSessionId(response);
             Alert.alert('Success of registration');
         } catch (err) {
             Alert.alert(err.message);
