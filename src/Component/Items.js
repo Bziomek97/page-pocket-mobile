@@ -38,6 +38,8 @@ export class Items extends Component {
                         tiltAngle: Defaults to 0.05. magnification: Defaults to 1.0. pressMagnification: Defaults to
                         1.0. pressDuration: Defaults to 0.3. pressDelay: Defaults to 0.0.</Text>
 
+                    <Text numberOfLines={1} style={[styles.link]}>https://youtu.be/MwTbFT7wMM8?t=2624</Text>
+
                 </TouchableOpacity>
 
             </View>
@@ -70,7 +72,8 @@ const styles = StyleSheet.create({
        width:'100%',
    },
     titleText: {
-        color: 'black',
+        color: 'white',
+        fontSize:20,
     },
     descriptionText: {
         color: 'white',
@@ -78,9 +81,25 @@ const styles = StyleSheet.create({
     },
     hasztag: {
         color: 'white',
-        size: 5,
+        fontSize: 8,
         borderBottomColor: 'gray',
         borderBottomWidth: 1,
+
+
+    },
+    link: {
+        color: 'black',
+        size: 5,
+        borderRadius: 4,
+        // borderWidth: 1,
+        // borderColor: 'white',
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+
+        width:'100%',
+        alignItems: 'center',
+
+
+
 
 
     }
