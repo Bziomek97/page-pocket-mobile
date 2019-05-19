@@ -7,7 +7,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
 import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom-tabs";
 
-
+//Background Color
+const bgColor = '#1a1a1a';
 
 const HomeStack = createStackNavigator(
     {
@@ -19,6 +20,10 @@ const HomeStack = createStackNavigator(
         
         title: 'Home',
         //Header title
+        headerStyle: {
+          backgroundColor: bgColor,
+        },
+        headerTintColor: 'white',
       },
     }
 );
@@ -30,8 +35,12 @@ const SearchStack = createStackNavigator(
     {
       //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
       defaultNavigationOptions: {
-        title: 'Favorite',
+        title: 'Search',
         //Header title
+        headerStyle: {
+          backgroundColor: bgColor,
+        },
+        headerTintColor: 'white',
       },
     }
 );
@@ -46,8 +55,12 @@ const ProfileStack = createStackNavigator(
         //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
         defaultNavigationOptions: {
             initialRoute: 'AccountScreen',
-            title: 'Profile',
+            title: 'Account Settings',
             //Header title
+        headerStyle: {
+          backgroundColor: bgColor,
+        },
+        headerTintColor: 'white',
         },
     }
 );
@@ -64,7 +77,7 @@ ProfileStack.navigationOptions = ({ navigation }) => {
 };
 
 
-const App = createMaterialBottomTabNavigator(
+/*const App = createMaterialBottomTabNavigator(
     {
       Home: { screen: HomeStack },
       Search: { screen: SearchStack },
@@ -111,7 +124,48 @@ const App = createMaterialBottomTabNavigator(
 
 
     }
+);*/
+
+const App = createBottomTabNavigator(
+  {
+    Home: { screen: HomeStack },
+    Search: { screen: SearchStack },
+    Profile: {screen: ProfileStack},
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        const { routeName } = navigation.state;
+        let IconComponent = Ionicons;
+        let iconName;
+
+        if (routeName === 'Home') {
+          iconName = `ios-home`;
+        } else if (routeName === 'Search') {
+          iconName = `ios-search`;
+        }
+        else if (routeName === 'Profile') {
+            iconName = `ios-person`;
+        }
+
+        return <IconComponent name={iconName} size={25} color={tintColor} />;
+      },
+    }),
+      initialRoute: 'Home',
+      tabBarOptions:{
+        activeTintColor: '#057302',
+        inactiveTintColor: 'white',
+      
+        style: {
+          backgroundColor: bgColor,
+          borderColor: "transparent",
+        },
+    },
+
+
+  }
 );
+
 //For React Navigation 2.+ need to export App only
 //export default App;
 //For React Navigation 3.+
