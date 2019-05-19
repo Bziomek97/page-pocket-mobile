@@ -6,10 +6,15 @@ import {
     TouchableHighlight,
     StyleSheet,
     ImageBackground,
+    Dimensions,
     Alert
 } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { register } from '../API/Users';
+import { LinearGradient } from 'expo';
+
+var height = Dimensions.get('window').height;
+var width = Dimensions.get('window').width;
 import { saveSessionId } from '../session';
 
 export default class SignUp extends React.Component<Props> {
@@ -72,21 +77,27 @@ export default class SignUp extends React.Component<Props> {
                 style={{width: '100%', height: '100%'}}
             >
 
-            <KeyboardAwareScrollView
+                <KeyboardAwareScrollView
                 enableOnAndroid = 'true'
                 style={styles.container}
             >
+
+                    <View style={styles.gradient}>
+                    <LinearGradient
+                        colors={['rgba(255,255,255,0.2)', 'rgba(255,255,255,0)']}>
+
                 <View>
+                    <Text style={styles.Txt}>Sign Up</Text>
                     <TextInput
                         style={styles.input}
-                        placeholder='Imie'
+                        placeholder='Name'
                         autoCapitalize="none"
                         placeholderTextColor='darkgrey'
                         onChangeText={val => this.onChangeText('firstName', val)}
                     />
                     <TextInput
                         style={styles.input}
-                        placeholder='Nazwisko'
+                        placeholder='Surname'
                         autoCapitalize="none"
                         placeholderTextColor='darkgrey'
                         onChangeText={val => this.onChangeText('lastName', val)}
@@ -101,7 +112,7 @@ export default class SignUp extends React.Component<Props> {
                     />
                     <TextInput
                         style={styles.input}
-                        placeholder='Hasło'
+                        placeholder='Password'
                         secureTextEntry={true}
                         autoCapitalize="none"
                         placeholderTextColor='darkgrey'
@@ -109,16 +120,20 @@ export default class SignUp extends React.Component<Props> {
                     />
                     <TextInput
                         style={styles.input}
-                        placeholder='Potwierdz Hasło'
+                        placeholder='Repeate Password'
                         secureTextEntry={true}
                         autoCapitalize="none"
                         placeholderTextColor='darkgrey'
                         onChangeText={val => this.onChangeText('confirmPassw', val)}
                     />
-                    <TouchableHighlight style={styles.button} onPress = {this.signUp}>
-                        <Text style={styles.buttonTxt}>Press Me</Text>
-                    </TouchableHighlight>
                 </View>
+
+                    <TouchableHighlight style={styles.button} onPress = {this.signUp}>
+                        <Text style={styles.buttonTxt}>Registrate</Text>
+                    </TouchableHighlight>
+
+            </LinearGradient>
+                    </View>
             </KeyboardAwareScrollView>
 
             </ImageBackground>)
@@ -143,32 +158,52 @@ const styles = StyleSheet.create({
     input: {
         alignItems: 'center',
         color:  'white',
-        height: 50,
+        backgroundColor: 'rgba(154,154,154, 0.8)',
+        height: height*0.04,
         fontSize: 18,
-        borderBottomWidth: 2,
-        borderBottomColor: 'darkgrey',
-        margin: 16,
+        borderRadius: 50,
+        marginHorizontal: '8%',
+        marginVertical: 10,
+        textAlign: 'center',
     },
     button: {
-        marginTop: 16,
+        marginTop: 32,
+        marginBottom: 64,
         backgroundColor: '#9a9a9a',
-        height: 50,
-        width: '90%',
-        left: 16,
+        height: height*0.04,
+        width: '40%',
+        left: '52%',
         alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 50,
     },
     buttonTxt: {
         color:  'white',
-        height: 50,
-        width: 150,
         fontSize: 18,
-        margin: 16,
         textAlign: 'center',
     },
+    Txt: {
+        color:  'white',
+        fontWeight: "bold",
+        height: height*0.08,
+        fontSize: height*0.06,
+        marginTop: 12,
+        marginBottom: 25,
+        marginVertical: 20,
+        textAlign: 'center',
+    },
+    gradient: {
+        width: width*0.9,
+        height: height*0.7,
+        borderWidth: 5,
+        borderRadius: 15,
+        borderStyle: 'solid',
+        borderColor: 'rgba(255,255,255)',
+    },
     container: {
-        height: '100%',
-        width: '100%',
-        flex: 0.8,
-        justifyContent: 'flex-start',
+        flex: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: '10%',
     }
 });

@@ -6,10 +6,17 @@ import {
     TouchableHighlight,
     StyleSheet,
     ImageBackground,
+    Dimensions,
     Alert
 } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { login } from '../API/Users';
+import { LinearGradient } from 'expo';
+// import { Text, View, StyleSheet } from 'react-native';
+//import { Constants } from 'expo';
+
+var height = Dimensions.get('window').height;
+var width = Dimensions.get('window').width;
 import { saveSessionId } from '../session';
 
 export default class SignIn extends React.Component<Props> {
@@ -66,8 +73,13 @@ export default class SignIn extends React.Component<Props> {
                 enableOnAndroid = 'true'
                 style={styles.container}
             >
-                <View>
 
+                <View style={styles.gradient}>
+                    <LinearGradient
+                        colors={['rgba(255,255,255,0.2)', 'rgba(255,255,255,0)']}>
+
+                <View>
+                    <Text style={styles.Txt}>Sign In</Text>
                     <TextInput
                         style={styles.input}
                         placeholder='E-mail'
@@ -78,15 +90,20 @@ export default class SignIn extends React.Component<Props> {
                     />
                     <TextInput
                         style={styles.input}
-                        placeholder='Hasło'
+                        placeholder='Password'
                         secureTextEntry={true}
                         autoCapitalize="none"
                         placeholderTextColor='darkgrey'
                         onChangeText={val => this.onChangeText('password', val)}
                     />
+                </View>
+
+
                     <TouchableHighlight style={styles.button} onPress = {this.signUp}>
                         <Text style={styles.buttonTxt}>Login</Text>
                     </TouchableHighlight>
+
+                    </LinearGradient>
                 </View>
 
             </KeyboardAwareScrollView>
@@ -97,44 +114,66 @@ export default class SignIn extends React.Component<Props> {
 
 const styles = StyleSheet.create({
     text: {
-        color:  'white',
+        color:  'black',
         height: 50,
         width: 350,
-        fontSize: 18,
-        margin: 16,
+        fontSize: 20,
+        margin: 14,
     },
     input: {
         alignItems: 'center',
         color:  'white',
-        height: 50,
+        backgroundColor: 'rgba(154,154,154, 0.8)',
+        height: height*0.04,
         fontSize: 18,
-        borderBottomWidth: 2,
-        borderBottomColor: 'darkgrey',
-        margin: 16,
+        borderRadius: 50,
+        marginHorizontal: '8%',
+        marginVertical: 10,
+        textAlign: 'center',
     },
     button: {
-        position: 'absolute', left: '50%',
-        marginTop: 16,
+        marginTop: 32,
+        marginBottom: 64,
         backgroundColor: '#9a9a9a',
-        height: 50,
-        width: '75%',
-        opacity: 0.5,
-        borderRadius: 50,
+        height: height*0.04,
+        width: '40%',
+        left: '52%',
         alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 50,
     },
     buttonTxt: {
         color:  'white',
-        height: 50,
-        width: 150,
         fontSize: 18,
-        margin: 16,
         textAlign: 'center',
     },
-
+    Txt: {
+        color:  'white',
+        fontWeight: "bold",
+        height: height*0.08,
+        fontSize: height*0.06,
+        marginTop: 12,
+        marginBottom: 25,
+        marginVertical: 20,
+        textAlign: 'center',
+    },
+//    fixedRatio: {
+//        backgroundColor: 'rebeccapurple',
+//        flex: 1,
+//        aspectRatio: 1
+//    },
+    gradient: {
+        width: width*0.9,
+        height: height*0.7,
+        borderWidth: 5,
+        borderRadius: 15,
+        borderStyle: 'solid',
+        borderColor: 'rgba(255,255,255)',
+    },
     container: {
-        height: '100%',
-        width: '100%',
-        flex: 0.8,
-        justifyContent: 'flex-start',
+        flex: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: '10%',
     }
 });
