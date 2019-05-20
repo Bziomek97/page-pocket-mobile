@@ -51,7 +51,7 @@ export default class SeachScreen extends React.Component<Props> {
             </Header>
             <ImageBackground
             source={require("../public/materials/background.jpg")}
-            style={{width: '100%', height: '92%'}}
+            style={{width: '100%', height: '93%'}}
             >
               <FlatList>
               </FlatList>
