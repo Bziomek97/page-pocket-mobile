@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { getBookmark } from './API/Pockets';
 import { SearchBar, Header, colors } from 'react-native-elements';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default class SearchScreen extends React.Component<Props> {
 
@@ -18,34 +19,50 @@ export default class SearchScreen extends React.Component<Props> {
     search: "",
   }
 
+
+  searchFilterFunction = (search) => {
+    let array = this.state.copyData;
+    let newArray;
+
+    console.log(newArray = array.filter(value => {
+      return value.tags.filter(tag => (tag.toLowerCase()).startsWith(search.toLowerCase())).length !== 0;
+    }));
+
+    this.setState({data: newArray});
+  };
+
   componentWillMount() {
     getBookmark()
     .then(response => {
-      this.setState({data: response});
+      this.setState({data: response,copyData: response});
     });
   }
 
   _onChange = (search) => {
     this.setState({search});
+    if(search !== "") this.searchFilterFunction(search);
+    else {
+      const oldData= this.state.copyData;
+      this.setState({data: oldData});
+    }
   }
 
   _searchBar = () => {
     return(<SearchBar          
       round
       searchIcon={{ size: 24 }}
-      placeholder="Search bookmarks by tags"
+      placeholder="Search bookmarks by tags..."
       onChangeText={this._onChange}
       value={this.state.search}
-      onClear={text => this.setState({search: text})}
+      onClear={text => this.setState({search: text,data: this.state.copyData})}
       containerStyle={styles.input}
     />);
   }
 
   _onPress = (item) => {
-    const url = ((/(((http|https):\/\/)(\w+\.)+\w+)/+item.source)) ? 'http://'+item.source: item.source;
+    const url = (!(/(http|https):\/\//).test(item.source)) ? 'http://'+item.source: item.source;
     Linking.canOpenURL(url).then(supported => {
       if(supported) Linking.openURL(url);
-      else console.log("Don't know how to open URI: " + url);
     });
   }
   
@@ -77,11 +94,13 @@ export default class SearchScreen extends React.Component<Props> {
             source={require("../public/materials/background.jpg")}
             style={{width: '100%', height: '93%'}}
             >
+            <ScrollView>
               <FlatList
                 data={data}
                 renderItem={this._renderItem}
               >
               </FlatList>
+              </ScrollView>
             </ImageBackground>
           </View>
     );
