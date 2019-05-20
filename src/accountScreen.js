@@ -5,10 +5,18 @@ import {
     Text,
     ImageBackground,
     StyleSheet,
-    Alert
+    Alert,
+    Dimensions,
+    View
 } from 'react-native';
 import { logout } from './API/Users'
 import { isLogged , clearSession, getSessionId, saveSessionId} from './session'
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
+import { LinearGradient } from 'expo';
+
+
+var height = Dimensions.get('window').height;
+var width = Dimensions.get('window').width;
 
 export default class AccountScreen extends React.Component<Props> {
 
@@ -55,7 +63,7 @@ export default class AccountScreen extends React.Component<Props> {
         return (
         <TouchableOpacity onPress={() => this._onPress(item)}
         style={styles.row}>
-        <Text>{item.key}</Text>
+            <Text style={styles.listtxt}>{item.key}</Text>
         </TouchableOpacity>);
     }
 
@@ -74,13 +82,24 @@ export default class AccountScreen extends React.Component<Props> {
     render() {
         return(
         <ImageBackground source={require("../public/materials/background.jpg")}
+
         style={styles.container}>
-                <FlatList
+
+            <LinearGradient
+                colors={['rgba(255,255,255,0.2)', 'rgba(255,255,255,0)']}>
+            <View style={styles.gradient}>
+
+            <FlatList
                     //Lista elementow
                     data={this.state.listItem}
                     //Co ma renderowac
                     renderItem={this._renderItem}
                 />
+
+
+            </View>
+            </LinearGradient>
+
         </ImageBackground>
         );
     }
@@ -90,11 +109,36 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: '100%',
+        flex: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    gradient: {
+        width: width*0.9,
+        height: height*0.7,
+        borderWidth: 5,
+        borderRadius: 15,
+        borderStyle: 'solid',
+        borderColor: 'rgba(255,255,255,0.3)',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     row: {
-        backgroundColor: 'rgba(154,154,154,0.5)',
+        backgroundColor: 'rgba(154,154,154,0.4)',
+        height: height*0.07,
+        width: width*0.6,
         paddingLeft: 16,
-        marginTop: 1,
-        marginBottom: 1,
+        marginTop: 15,
+        marginBottom: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 50,
+        borderColor: 'rgba(255,255,255,0.5)',
+        borderWidth: 5,
     },
+    listtxt: {
+        fontWeight: "bold",
+        color:  'white',
+        fontSize: height*0.04,
+    }
 });
