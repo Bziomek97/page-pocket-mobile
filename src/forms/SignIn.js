@@ -51,7 +51,7 @@ export default class SignIn extends React.Component<Props> {
             this.onValid();
             // here place your signup logic
             const response = await login(this.state);
-            saveSessionId(response);
+            session.saveSessionId(response);
             Alert.alert('Success of login');
             this.props.navigation.navigate('Home');
         } catch (err) {
@@ -79,7 +79,7 @@ export default class SignIn extends React.Component<Props> {
                         colors={['rgba(255,255,255,0.2)', 'rgba(255,255,255,0)']}>
 
                 <View>
-                    <Text style={styles.Txt}>Sign In</Text>
+
                     <TextInput
                         style={styles.input}
                         placeholder='E-mail'
@@ -90,7 +90,7 @@ export default class SignIn extends React.Component<Props> {
                     />
                     <TextInput
                         style={styles.input}
-                        placeholder='Password'
+                        placeholder='Hasło'
                         secureTextEntry={true}
                         autoCapitalize="none"
                         placeholderTextColor='darkgrey'
@@ -112,68 +112,55 @@ export default class SignIn extends React.Component<Props> {
     }
 }
 
+/*
+                    <Button
+                        title='Sign Up'
+                        style = {styles.button}
+                        onPress={this.signUp}
+                    />
+ */
 const styles = StyleSheet.create({
     text: {
-        color:  'black',
+        color:  'white',
         height: 50,
         width: 350,
-        fontSize: 20,
-        margin: 14,
+        fontSize: 18,
+        margin: 16,
     },
     input: {
         alignItems: 'center',
         color:  'white',
-        backgroundColor: 'rgba(154,154,154, 0.8)',
-        height: height*0.04,
+        height: 50,
         fontSize: 18,
-        borderRadius: 50,
-        marginHorizontal: '8%',
-        marginVertical: 10,
-        textAlign: 'center',
+        borderBottomWidth: 2,
+        borderBottomColor: 'darkgrey',
+        margin: 16,
     },
     button: {
-        marginTop: 32,
-        marginBottom: 64,
+        position: 'absolute', left: '50%',
+        marginTop: 16,
         backgroundColor: '#9a9a9a',
-        height: height*0.04,
-        width: '40%',
-        left: '52%',
+        height: 50,
+        width: '75%',
+        opacity: 0.5,
+        borderRadius: 50,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 50,
     },
     buttonTxt: {
         color:  'white',
+        height: 50,
+        width: 150,
         fontSize: 18,
+        margin: 16,
         textAlign: 'center',
     },
-    Txt: {
-        color:  'white',
-        fontWeight: "bold",
-        height: height*0.08,
-        fontSize: height*0.06,
-        marginTop: 12,
-        marginBottom: 25,
-        marginVertical: 20,
-        textAlign: 'center',
-    },
-//    fixedRatio: {
-//        backgroundColor: 'rebeccapurple',
-//        flex: 1,
-//        aspectRatio: 1
-//    },
-    gradient: {
-        width: width*0.9,
-        height: height*0.7,
-        borderWidth: 5,
-        borderRadius: 15,
-        borderStyle: 'solid',
-        borderColor: 'rgba(255,255,255)',
-    },
+
     container: {
-        flex: 10,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: '10%',
+        height: '100%',
+        width: '100%',
+        flex: 0.8,
+        justifyContent: 'flex-start',
     }
 });
