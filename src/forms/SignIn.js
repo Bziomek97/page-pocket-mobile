@@ -6,11 +6,18 @@ import {
     TouchableHighlight,
     StyleSheet,
     ImageBackground,
+    Dimensions,
     Alert
 } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { login } from '../API/Users';
-import session from '../session';
+import { LinearGradient } from 'expo';
+// import { Text, View, StyleSheet } from 'react-native';
+//import { Constants } from 'expo';
+
+var height = Dimensions.get('window').height;
+var width = Dimensions.get('window').width;
+import { saveSessionId } from '../session';
 
 export default class SignIn extends React.Component<Props> {
 
@@ -66,6 +73,11 @@ export default class SignIn extends React.Component<Props> {
                 enableOnAndroid = 'true'
                 style={styles.container}
             >
+
+                <View style={styles.gradient}>
+                    <LinearGradient
+                        colors={['rgba(255,255,255,0.2)', 'rgba(255,255,255,0)']}>
+
                 <View>
 
                     <TextInput
@@ -84,9 +96,14 @@ export default class SignIn extends React.Component<Props> {
                         placeholderTextColor='darkgrey'
                         onChangeText={val => this.onChangeText('password', val)}
                     />
+                </View>
+
+
                     <TouchableHighlight style={styles.button} onPress = {this.signUp}>
                         <Text style={styles.buttonTxt}>Login</Text>
                     </TouchableHighlight>
+
+                    </LinearGradient>
                 </View>
 
             </KeyboardAwareScrollView>
@@ -128,6 +145,8 @@ const styles = StyleSheet.create({
         opacity: 0.5,
         borderRadius: 50,
         alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 50,
     },
     buttonTxt: {
         color:  'white',
