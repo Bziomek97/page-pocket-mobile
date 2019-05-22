@@ -156,11 +156,27 @@ const styles = StyleSheet.create({
         margin: 16,
         textAlign: 'center',
     },
-
-    container: {
-        height: '100%',
-        width: '100%',
-        flex: 0.8,
-        justifyContent: 'flex-start',
-    }
+    Txt: {
+        color:  'white',
+        fontWeight: "bold",
+        height: height*0.08,
+        fontSize: height*0.06,
+        marginTop: 12,
+        marginBottom: 25,
+        marginVertical: 20,
+        textAlign: 'center',
+    },
+//    fixedRatio: {
+//        backgroundColor: 'rebeccapurple',
+//        flex: 1,
+//        aspectRatio: 1
+//    },
+    gradient: {
+        width: width*0.9,
+        height: height*0.7,
+        borderWidth: 5,
+        borderRadius: 15,
+        borderStyle: 'solid',
+        borderColor: 'rgba(255,255,255,0.3)',
+    },
 });

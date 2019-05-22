@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
         borderWidth: 5,
         borderRadius: 15,
         borderStyle: 'solid',
-        borderColor: 'rgba(255,255,255)',
+        borderColor: 'rgba(255,255,255,0.3)',
     },
     container: {
         flex: 10,
