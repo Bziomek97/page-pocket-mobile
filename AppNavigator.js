@@ -3,8 +3,10 @@ import Home from './src/Home';
 import AccountScreen from './src/accountScreen'
 import SignUp from './src/forms/SignUp';
 import SignIn from './src/forms/SignIn';
+import SearchScreen from './src/searchScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
+import { SearchBar } from 'react-native-elements';
 import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom-tabs";
 
 //Background Color
@@ -30,19 +32,14 @@ const HomeStack = createStackNavigator(
 
 const SearchStack = createStackNavigator(
     {
-      Login: { screen: SignIn },
+      Search: { screen: SearchScreen },
     },
     {
       //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
       defaultNavigationOptions: {
-        title: 'Search',
-        //Header title
-        headerStyle: {
-          backgroundColor: bgColor,
-        },
-        headerTintColor: 'white',
+        header: null,
       },
-    }
+    },
 );
 
 const ProfileStack = createStackNavigator(
@@ -105,23 +102,10 @@ ProfileStack.navigationOptions = ({ navigation }) => {
         initialRoute: 'Home',
         activeColor: '#003300',
         inactiveColor: 'white',
-        barStyle:{
-         backgroundColor: 'rgba(154,154,154,0.5)',
+        barStyle:{backgroundColor: 'rgba(154,154,154,0.5)',
         position:'absolute',
         tabBarVisible: false,
          },
-
-
-
-          // style: {
-          //     backgroundColor: 'transparent',
-          //     borderTopWidth: 0,
-          //     position: 'absolute',
-          //     left: 40,
-          //     right: 40,
-          //     bottom: 10,
-          // },
-
 
     }
 );*/
@@ -166,7 +150,4 @@ const App = createBottomTabNavigator(
   }
 );
 
-//For React Navigation 2.+ need to export App only
-//export default App;
-//For React Navigation 3.+
 export default createAppContainer(App);
