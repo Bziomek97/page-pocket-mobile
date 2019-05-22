@@ -22,11 +22,9 @@ export default class SearchScreen extends React.Component<Props> {
 
   searchFilterFunction = (search) => {
     let array = this.state.copyData;
-    let newArray;
-
-    console.log(newArray = array.filter(value => {
+    let newArray = array.filter(value => {
       return value.tags.filter(tag => (tag.toLowerCase()).startsWith(search.toLowerCase())).length !== 0;
-    }));
+    });
 
     this.setState({data: newArray});
   };
@@ -107,8 +105,8 @@ export default class SearchScreen extends React.Component<Props> {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
+  const styles = StyleSheet.create({
+    container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
