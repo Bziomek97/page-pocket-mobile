@@ -102,23 +102,10 @@ ProfileStack.navigationOptions = ({ navigation }) => {
         initialRoute: 'Home',
         activeColor: '#003300',
         inactiveColor: 'white',
-        barStyle:{
-         backgroundColor: 'rgba(154,154,154,0.5)',
+        barStyle:{backgroundColor: 'rgba(154,154,154,0.5)',
         position:'absolute',
         tabBarVisible: false,
          },
-
-
-
-          // style: {
-          //     backgroundColor: 'transparent',
-          //     borderTopWidth: 0,
-          //     position: 'absolute',
-          //     left: 40,
-          //     right: 40,
-          //     bottom: 10,
-          // },
-
 
     }
 );*/
@@ -163,7 +150,4 @@ const App = createBottomTabNavigator(
   }
 );
 
-//For React Navigation 2.+ need to export App only
-//export default App;
-//For React Navigation 3.+
 export default createAppContainer(App);
