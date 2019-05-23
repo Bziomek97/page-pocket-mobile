@@ -51,9 +51,9 @@ export default class SignIn extends React.Component<Props> {
             this.onValid();
             // here place your signup logic
             const response = await login(this.state);
-            session.saveSessionId(response);
+            saveSessionId(response);
             Alert.alert('Success of login');
-            this.props.navigation.navigate('Home');
+            this.props.navigation.goBack();
         } catch (err) {
             Alert.alert(err.message);
             return;
