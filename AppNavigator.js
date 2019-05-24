@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from './src/Home';
+import Home from './src/homeScreen';
 import AccountScreen from './src/accountScreen'
 import SignUp from './src/forms/SignUp';
 import SignIn from './src/forms/SignIn';
