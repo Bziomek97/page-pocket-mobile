@@ -5,7 +5,10 @@ import {Image, StyleSheet} from 'react-native'
 export default class Base64Loader extends Component<Props>{
 
     _imgLoader = (img) => {
+        if(img !== null || typeof img !== undefined)
         return `data:image/jpeg;base64,${img}`;
+        else
+        return /* require image placeholder*/;
     }
 
     render(){
