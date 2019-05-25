@@ -5,6 +5,7 @@ import SignUp from './src/forms/SignUp';
 import SignIn from './src/forms/SignIn';
 import SearchScreen from './src/searchScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import DetailView from './src/Component/DetailView';
 import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
 import { SearchBar } from 'react-native-elements';
 import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom-tabs";
@@ -33,6 +34,7 @@ const HomeStack = createStackNavigator(
 const SearchStack = createStackNavigator(
     {
       Search: { screen: SearchScreen },
+      DetailView: { screen: DetailView },
     },
     {
       //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
