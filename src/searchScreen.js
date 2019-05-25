@@ -88,10 +88,6 @@ export default class SearchScreen extends React.Component<Props> {
               containerStyle={{ backgroundColor: '#1a1a1a', borderBottomWidth: 0}}
             >
             </Header>
-            <ImageBackground
-            source={require("../public/materials/background.jpg")}
-            style={{width: '100%', height: '93%'}}
-            >
             <ScrollView>
               <FlatList
                 data={data}
@@ -99,7 +95,6 @@ export default class SearchScreen extends React.Component<Props> {
               >
               </FlatList>
               </ScrollView>
-            </ImageBackground>
           </View>
     );
   }
@@ -110,6 +105,7 @@ export default class SearchScreen extends React.Component<Props> {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
+      backgroundColor: '#7c7b7d'
   },
   contentTxt: {
     fontSize: 25,
@@ -119,7 +115,8 @@ export default class SearchScreen extends React.Component<Props> {
       width: '100%',
       fontSize: 18,
       backgroundColor: "transparent",
-      borderColor: 'black',
+      borderColor: 'transparent',
+    height: '97%'
   },
   row: {
     backgroundColor: 'rgba(154,154,154,0.5)',
