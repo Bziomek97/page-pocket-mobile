@@ -8,6 +8,8 @@ import {
 } from 'react-native'
 import {LinearGradient} from "expo";
 
+const margin = 10;
+
 export class Items extends Component {
     constructor(props) {
         super(props)
@@ -26,21 +28,9 @@ export class Items extends Component {
 
                 <TouchableOpacity style={styles.button} onPress={this.onPress}>
 
-
-
-                        <Image style={[styles.image]} source={require('../../public/materials/example.jpeg')}/>
-
-                        <Text style={[styles.titleText]}>My Page </Text>
-
-                        <Text numberOfLines={1} style={[styles.hasztag]}>#polishboy #polishgirl #polishboys #polishgirls
-                            #polskichlopak #polskadziewczyna #polskichłopak #polishmen #polskifacet #firefighter #firefight
-                            #firebrigade #fire #straz #strazackie #pozarna #strażpożarna #straż #strażak</Text>
-
-                        <Text numberOfLines={3} style={[styles.descriptionText]}>enabled: If true, parallax effects are
-                            enabled. Defaults to true. shiftDistanceX: Defaults to 2.0. shiftDistanceY: Defaults to 2.0.
-                            tiltAngle: Defaults to 0.05. magnification: Defaults to 1.0. pressMagnification: Defaults to
-                            1.0. pressDuration: Defaults to 0.3. pressDelay: Defaults to 0.0.</Text>
-                        <Text numberOfLines={1} style={[styles.link]}>https://youtu.be/MwTbFT7wMM8?t=2624</Text>
+                        <Image style={styles.image} source={require('../../public/materials/example.jpeg')}/>
+                        <Text style={styles.titleText}>My Page </Text>
+                        <Text numberOfLines={1} style={styles.link}>https://youtu.be/MwTbFT7wMM8?t=2624</Text>
 
                 </TouchableOpacity>
 
@@ -51,51 +41,37 @@ export class Items extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        width:'100%',
+        flex: 0.51,
         flexDirection: 'column',
-        justifyContent: 'center',
-        paddingHorizontal: 10,
-    },
-    button: {
-        borderRadius:5,
-        alignItems: 'center',
+        justifyContent: 'space-between',
+        borderColor: 'rgba(0,0,0,0.8)',
+        borderWidth: 2,
+        borderStyle: 'solid',
+        borderRadius: 5,
         backgroundColor: 'rgba(154,154,154,0.5)',
-        padding: 0
     },
-    countText: {
-        color: '#FFFFFF'
+    image: {
+        top: margin,
+        left: margin,
+        resizeMode: 'stretch',
+        width: '94%',
+        height: 175,
+        borderRadius: 5,
     },
-   image: {
-       resizeMethod:'resize',
-       borderTopLeftRadius: 5,
-       borderTopRightRadius: 5,
-       height:75 ,
-       width:'100%',
-   },
     titleText: {
+        marginTop: 7.5,
+        left: margin,
         color: 'white',
-        fontSize:20,
-        alignItems: 'center',
+        fontSize:30,
+        fontStyle: 'italic',
+        fontWeight: 'bold',
         width:'100%',
-    },
-    descriptionText: {
-        color: 'white',
-
-    },
-    hasztag: {
-        color: 'white',
-        fontSize: 8,
-        borderBottomColor: 'gray',
-        borderBottomWidth: 1,
     },
     link: {
-        color: 'black',
+        left: margin,
         size: 5,
-        borderBottomLeftRadius: 5,
-        borderBottomRightRadius: 5,
-        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+        marginBottom: 15,
         width:'100%',
-        alignItems: 'center',
-
+        color:'#eaeae1'
     }
 })
