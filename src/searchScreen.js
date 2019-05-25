@@ -10,14 +10,15 @@ import {
 } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import { getBookmark } from './API/Pockets';
+import { isLogged } from './scripts/session';
 import { SearchBar, Header, colors } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 
 export default class SearchScreen extends React.Component<Props> {
 
-
   state = {
     search: "",
+    result: false,
   }
 
 
@@ -30,20 +31,30 @@ export default class SearchScreen extends React.Component<Props> {
     this.setState({data: newArray});
   };
 
-  componentDidMount() {
+  /*componentDidMount() {
     isLogged()
     .then(result => {
+      this.props.navigation.setParams({header: null})
       this.setState({result});
       if(result) getBookmark().then(response => this.setState({data: response,copyData: response}))
     })
-  }
+  }*/
 
   _updater = () => {
     isLogged()
     .then(result => {
       this.setState({result});
-      if(result) getBookmark().then(response => this.setState({data: response,copyData: response}))
-    })
+      if(result) {
+        this.props.navigation.setParams({Header: null});
+        getBookmark().then(response => this.setState({data: response,copyData: response}));
+      }
+      else { 
+        this.props.navigation.setParams({
+          title: 'search',
+          backgroundColor: '#1a1a1a',
+        });
+        this.setState({data:[],copyData:[]});
+      }})
   }
 
   _onChange = (search) => {
@@ -88,21 +99,21 @@ export default class SearchScreen extends React.Component<Props> {
 
     const { search, data } = this.state;
 
+    if(this.state.result)
     return (
-          <View style={styles.container}>
-          <NavigationEvents
-            onDidFocus = {() => {this._updater()}}
-            onDidBlur = {() => {this.setState({search: ""})}}
-          />
-            <Header
+        <View style={styles.container}>
+        <NavigationEvents
+          onDidFocus = {() => {this._updater()}}
+          onDidBlur = {() => {this.setState({search: ""})}}
+        />
+          <Header
               placement="left"
               centerComponent={this._searchBar()}
               leftComponentStyle={{width: 0}}
               centerContainerStyle={{ width: '100%', paddingHorizontal: 0}}
               rightComponentStyle={{width: 0}}
               containerStyle={{ backgroundColor: '#1a1a1a', borderBottomWidth: 0}}
-            >
-            </Header>
+            />
             <ImageBackground
             source={require("../public/materials/background.jpg")}
             style={{width: '100%', height: '93%'}}
@@ -114,9 +125,25 @@ export default class SearchScreen extends React.Component<Props> {
               >
               </FlatList>
               </ScrollView>
-            </ImageBackground>
-          </View>
+          </ImageBackground>
+
+        </View>
     );
+  else return (
+    <ImageBackground
+          source={require("../public/materials/background.jpg")}
+          style={{width: '100%', height: '100%'}}>
+
+        <NavigationEvents
+          onDidFocus = {() => {this._updater()}}
+        />  
+            <View style={styles.info}>
+              <Text style={styles.contentTxt}>
+                You must logged or registered to see your bookmarks or if u logged, you swipe down.
+              </Text>
+            </View>
+        </ImageBackground>
+  );
   }
 }
 
@@ -141,5 +168,23 @@ export default class SearchScreen extends React.Component<Props> {
     paddingLeft: 16,
     marginTop: 1,
     marginBottom: 1,
+  },
+  contentTxt: {
+    fontSize: 18,
+    marginBottom: 8,
+    textAlign: 'center',
+    color: 'white'
+  },
+  info:{
+    flex: 0.23,
+    alignItems: 'stretch',
+    width: '95%',
+    left: '2.5%',
+    borderColor: 'rgba(0,0,0,0.8)',
+    borderWidth: 2,
+    borderStyle: 'solid',
+    borderRadius: 5,
+    backgroundColor: 'rgba(154,154,154,0.5)',
+    marginTop: '52%',
   },
 });

@@ -1,19 +1,18 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, Image, StatusBar} from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default class DetailView extends React.Component<Props> {
 
     _renderTags = (tags) =>  {
         let stringTags = "";
         tags.forEach(el => {
-            stringTags += `${el} `
+            stringTags += `#${el} `
         });
             
         return(
-                <Text>
-                    {stringTags}
-                </Text>
-            );
+        <Text style={style.tags}>{stringTags}</Text>
+        );
     }
 
     render(){
@@ -21,10 +20,15 @@ export default class DetailView extends React.Component<Props> {
 
         return(
             <View style={style.background}>
-                <View style={style.empty}></View>
+                <StatusBar backgroundColor="grey"/>
+                <View style={style.borderWrapper}>
+                    <Image style={style.image} source={require('../../public/materials/example.jpeg')}/>
+                </View>
                 <Text style ={style.title}>{data.title}</Text>
                 {this._renderTags(data.tags)}
-                <Text>{data.description}</Text>
+                <ScrollView style={style.scroll}>
+                    <Text>{data.description}</Text>
+                </ScrollView>
             </View>
         );
     }
@@ -32,17 +36,31 @@ export default class DetailView extends React.Component<Props> {
 
 const style = StyleSheet.create({
     background: {
-        backgroundColor: 'lightgrey',
         height: '100%',
     },
-    empty: {
+    borderWrapper:{
+        borderBottomColor: 'black',
+        borderBottomWidth: 1,
         width: '100%',
         height: '45%',
-        backgroundColor: 'green',
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+        resizeMode: 'stretch',
     },
     title: {
         fontStyle: 'italic',
-        fontSize: 50,
+        fontWeigth: 'bold',
+        textAlign: 'center',
+        fontSize: 30,
+    },
+    tags: {
+        color: 'grey',
+        textAlign: 'center'
+    },
+    scroll:{
+        marginTop: 10,
+        left: 5,
     }
-
 });

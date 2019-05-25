@@ -33,14 +33,21 @@ const HomeStack = createStackNavigator(
 
 const SearchStack = createStackNavigator(
     {
-      Search: { screen: SearchScreen },
-      DetailView: { screen: DetailView },
+      Search: { 
+        screen: SearchScreen,
+        navigationOptions: {
+          header: null,
+        }
+      },
+      DetailView: { 
+        screen: DetailView ,
+        navigationOptions: {
+          headerTransparent: true,
+        }
+      },
     },
     {
       //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
-      defaultNavigationOptions: {
-        header: null,
-      },
     },
 );
 
@@ -65,6 +72,17 @@ const ProfileStack = createStackNavigator(
 );
 
 ProfileStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+  };
+};
+
+SearchStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
   if (navigation.state.index > 0) {
     tabBarVisible = false;

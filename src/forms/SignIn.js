@@ -17,7 +17,7 @@ import { LinearGradient } from 'expo';
 
 var height = Dimensions.get('window').height;
 var width = Dimensions.get('window').width;
-import { saveSessionId } from '../session';
+import { saveSessionId } from '../scripts/session';
 
 export default class SignIn extends React.Component<Props> {
 

@@ -10,7 +10,7 @@ import {
     View
 } from 'react-native';
 import { logout } from './API/Users'
-import { isLogged , clearSession, getSessionId, saveSessionId} from './session'
+import { isLogged , clearSession, getSessionId, saveSessionId} from './scripts/session'
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 import { LinearGradient } from 'expo';
 
