@@ -11,26 +11,22 @@ import {LinearGradient} from "expo";
 const margin = 10;
 
 export class Items extends Component {
-    constructor(props) {
-        super(props)
-        this.state = { count: 0 }
-    }
 
-    onPress = () => {
-        this.setState({
-            count: this.state.count+1
-        })
+
+    onPress = (data) => {
+        console.log(data);
     }
 
     render() {
+        const data = this.props.data;
         return (
             <View style={styles.container}>
 
-                <TouchableOpacity style={styles.button} onPress={this.onPress}>
+                <TouchableOpacity style={styles.button} onPress={() => this.onPress(data)}>
 
                         <Image style={styles.image} source={require('../../public/materials/example.jpeg')}/>
-                        <Text style={styles.titleText}>My Page </Text>
-                        <Text numberOfLines={1} style={styles.link}>https://youtu.be/MwTbFT7wMM8?t=2624</Text>
+                        <Text style={styles.titleText}>{data.title}</Text>
+                        <Text numberOfLines={1} style={styles.link}>{data.source}</Text>
 
                 </TouchableOpacity>
 
@@ -49,6 +45,8 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderRadius: 5,
         backgroundColor: 'rgba(154,154,154,0.5)',
+        marginTop: 10,
+        marginBottom: 2.5,
     },
     image: {
         top: margin,

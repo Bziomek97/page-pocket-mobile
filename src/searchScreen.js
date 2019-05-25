@@ -8,6 +8,7 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
+import { NavigationEvents } from 'react-navigation';
 import { getBookmark } from './API/Pockets';
 import { SearchBar, Header, colors } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -30,10 +31,19 @@ export default class SearchScreen extends React.Component<Props> {
   };
 
   componentDidMount() {
-    getBookmark()
-    .then(response => {
-      this.setState({data: response,copyData: response});
-    });
+    isLogged()
+    .then(result => {
+      this.setState({result});
+      if(result) getBookmark().then(response => this.setState({data: response,copyData: response}))
+    })
+  }
+
+  _updater = () => {
+    isLogged()
+    .then(result => {
+      this.setState({result});
+      if(result) getBookmark().then(response => this.setState({data: response,copyData: response}))
+    })
   }
 
   _onChange = (search) => {
@@ -80,6 +90,10 @@ export default class SearchScreen extends React.Component<Props> {
 
     return (
           <View style={styles.container}>
+          <NavigationEvents
+            onDidFocus = {() => {this._updater()}}
+            onDidBlur = {() => {this.setState({search: ""})}}
+          />
             <Header
               placement="left"
               centerComponent={this._searchBar()}
