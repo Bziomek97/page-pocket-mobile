@@ -29,7 +29,7 @@ export default class SearchScreen extends React.Component<Props> {
     this.setState({data: newArray});
   };
 
-  componentWillMount() {
+  componentDidMount() {
     getBookmark()
     .then(response => {
       this.setState({data: response,copyData: response});
@@ -58,10 +58,11 @@ export default class SearchScreen extends React.Component<Props> {
   }
 
   _onPress = (item) => {
-    const url = (!(/(http|https):\/\//).test(item.source)) ? 'http://'+item.source: item.source;
+    /*const url = (!(/(http|https):\/\//).test(item.source)) ? 'http://'+item.source: item.source;
     Linking.canOpenURL(url).then(supported => {
       if(supported) Linking.openURL(url);
-    });
+    });*/
+    this.props.navigation.navigate('DetailView',{data: item});
   }
   
   _renderItem = ({item}) => {

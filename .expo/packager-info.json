@@ -1,9 +1,9 @@
 {
   "expoServerPort": 8044,
-  "expoServerNgrokUrl": "https://xt-btx.anonymous.page-pocket-mobile.exp.direct",
-  "packagerNgrokUrl": "https://packager.xt-btx.anonymous.page-pocket-mobile.exp.direct",
-  "ngrokPid": 2275,
+  "expoServerNgrokUrl": "https://ws-4su.anonymous.page-pocket-mobile.exp.direct",
+  "packagerNgrokUrl": "https://packager.ws-4su.anonymous.page-pocket-mobile.exp.direct",
+  "ngrokPid": 1616,
   "devToolsPort": 19002,
   "packagerPort": 19001,
-  "packagerPid": 2203
+  "packagerPid": 1495
 }
