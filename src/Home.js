@@ -4,10 +4,10 @@ import {
   Text,
   View,
   Button,
-  Alert,
   ImageBackground
 } from 'react-native';
 import { getBookmark } from './API/Pockets';
+import {Items } from "./Component/Items";
 
 export default class App extends React.Component<Props> {
 
@@ -25,12 +25,9 @@ export default class App extends React.Component<Props> {
         >
 
       <View style={styles.container}>
-        <Text style={styles.contentTxt}>Main Screen</Text>
-        <Button onPress={() => {this.props.navigation.navigate('SecondScreen')}} title="Change Screen" />
 
-        <Text style={styles.contentTxt}>Press button below</Text>
-        <Button onPress={() => App.getData()} title="Test button" />
-      </View>
+          <Items/>
+        </View>
 
         </ImageBackground>
     );
@@ -40,8 +37,9 @@ export default class App extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 10,
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
   contentTxt: {
     fontSize: 25,
