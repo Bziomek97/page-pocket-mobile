@@ -11,7 +11,7 @@ import {
 import { NavigationEvents } from 'react-navigation';
 import { getBookmark } from './API/Pockets';
 import {Items } from "./Component/Items";
-import {isLogged} from './session';
+import {isLogged} from './scripts/session';
 
 export default class App extends React.Component<Props> {
 
