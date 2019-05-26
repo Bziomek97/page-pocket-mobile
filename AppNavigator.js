@@ -35,9 +35,6 @@ const SearchStack = createStackNavigator(
     {
       Search: { 
         screen: SearchScreen,
-        navigationOptions: {
-          header: null,
-        }
       },
       DetailView: { 
         screen: DetailView ,
@@ -45,9 +42,6 @@ const SearchStack = createStackNavigator(
           headerTransparent: true,
         }
       },
-    },
-    {
-      //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
     },
 );
 

@@ -16,6 +16,24 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 export default class SearchScreen extends React.Component<Props> {
 
+  static navigationOptions = ({navigation}) => {
+    const login = navigation.getParam('login');
+    if(login){
+      return {
+        header: null,
+      }
+    }
+    else {
+      return {
+        title: "Search",
+        headerStyle: {
+          backgroundColor: '#1a1a1a',
+        },
+        headerTintColor: 'white',
+      }
+    }
+  }
+
   state = {
     search: "",
     result: false,
@@ -45,13 +63,12 @@ export default class SearchScreen extends React.Component<Props> {
     .then(result => {
       this.setState({result});
       if(result) {
-        this.props.navigation.setParams({Header: null});
+        this.props.navigation.setParams({login: result});
         getBookmark().then(response => this.setState({data: response,copyData: response}));
       }
       else { 
         this.props.navigation.setParams({
-          title: 'search',
-          backgroundColor: '#1a1a1a',
+          login: result
         });
         this.setState({data:[],copyData:[]});
       }})
@@ -114,18 +131,13 @@ export default class SearchScreen extends React.Component<Props> {
               rightComponentStyle={{width: 0}}
               containerStyle={{ backgroundColor: '#1a1a1a', borderBottomWidth: 0}}
             />
-            <ImageBackground
-            source={require("../public/materials/background.jpg")}
-            style={{width: '100%', height: '93%'}}
-            >
-            <ScrollView>
+            <ScrollView style={styles.flatList}>
               <FlatList
                 data={data}
                 renderItem={this._renderItem}
               >
               </FlatList>
               </ScrollView>
-          </ImageBackground>
 
         </View>
     );
@@ -187,4 +199,10 @@ export default class SearchScreen extends React.Component<Props> {
     backgroundColor: 'rgba(154,154,154,0.5)',
     marginTop: '52%',
   },
+  flatList:{
+    flex: 1,
+    backgroundColor: 'white', // Pick
+    alignItems: 'stretch',
+    width: '100%',
+  }
 });
