@@ -25,7 +25,7 @@ export class Items extends Component {
                 <TouchableOpacity style={styles.button} onPress={() => this.onPress(data)}>
 
                         <Image style={styles.image} source={require('../../public/materials/example.jpeg')}/>
-                        <Text style={styles.titleText}>{data.title}</Text>
+                        <Text style={styles.titleText} numberOfLines={2}>{data.title}</Text>
                         <Text numberOfLines={1} style={styles.link}>{data.source}</Text>
 
                 </TouchableOpacity>
