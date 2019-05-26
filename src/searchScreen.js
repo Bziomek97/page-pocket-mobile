@@ -9,10 +9,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
+import { LazyloadScrollView, LazyloadView } from 'react-native-lazyload-deux';
 import { getBookmark } from './API/Pockets';
 import { isLogged } from './scripts/session';
 import { SearchBar, Header } from 'react-native-elements';
-import { ScrollView } from 'react-native-gesture-handler';
 
 
 export default class SearchScreen extends React.Component<Props> {
@@ -132,13 +132,13 @@ export default class SearchScreen extends React.Component<Props> {
               rightComponentStyle={{width: 0}}
               containerStyle={{ backgroundColor: '#1a1a1a', borderBottomWidth: 0}}
             />
-            <ScrollView style={styles.flatList}>
+            <LazyloadScrollView style={styles.flatList}>
               <FlatList
                 data={data}
                 renderItem={this._renderItem}
               >
               </FlatList>
-              </ScrollView>
+              </LazyloadScrollView>
 
         </View>
     );
@@ -150,11 +150,11 @@ export default class SearchScreen extends React.Component<Props> {
         <NavigationEvents
           onDidFocus = {() => {this._updater()}}
         />  
-            <View style={styles.info}>
+            <LazyloadView style={styles.info}>
               <Text style={styles.contentTxt}>
                 You must logged or registered to see your bookmarks or if u logged, you swipe down.
               </Text>
-            </View>
+            </LazyloadView>
         </ImageBackground>
   );
   }
