@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text, Image, StatusBar, TouchableOpacity, Linking} from 'react-native';
+import { LazyloadView,LazyloadImage,LazyloadScrollView } from 'react-native-lazyload-deux';
 import {deleteBookmark} from '../API/Pockets';
 import { ScrollView } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';

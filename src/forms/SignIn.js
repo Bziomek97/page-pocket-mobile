@@ -12,6 +12,7 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { login } from '../API/Users';
 import { LinearGradient } from 'expo';
+import { LazyloadView } from 'react-native-lazyload-deux';
 // import { Text, View, StyleSheet } from 'react-native';
 //import { Constants } from 'expo';
 
@@ -74,7 +75,7 @@ export default class SignIn extends React.Component<Props> {
                 style={styles.container}
             >
 
-                <View style={styles.gradient}>
+                <LazyloadView style={styles.gradient}>
                     <LinearGradient
                         colors={['rgba(255,255,255,0.2)', 'rgba(255,255,255,0)']}>
 
@@ -104,7 +105,7 @@ export default class SignIn extends React.Component<Props> {
                     </TouchableHighlight>
 
                     </LinearGradient>
-                </View>
+                </LazyloadView>
 
             </KeyboardAwareScrollView>
 
@@ -112,13 +113,6 @@ export default class SignIn extends React.Component<Props> {
     }
 }
 
-/*
-                    <Button
-                        title='Sign Up'
-                        style = {styles.button}
-                        onPress={this.signUp}
-                    />
- */
 const styles = StyleSheet.create({
     text: {
         color:  'white',

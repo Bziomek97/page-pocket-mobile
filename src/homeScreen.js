@@ -9,6 +9,7 @@ import {
   RefreshControl
 } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
+import { LazyloadScrollView } from 'react-native-lazyload-deux';
 import { getBookmark } from './API/Pockets';
 import Items from "./Component/Items";
 import {isLogged} from './scripts/session';
@@ -62,10 +63,10 @@ export default class App extends React.Component<Props> {
           source={require("../public/materials/background.jpg")}
           style={{width: '100%', height: '100%'}}>
 
-      <NavigationEvents
-        onDidFocus={() => {this._updater()}}
-      />
-          <ScrollView 
+          <NavigationEvents
+            onDidFocus={() => {this._updater()}}
+          />
+          <LazyloadScrollView
           style={styles.container}
           refreshControl={
             <RefreshControl
@@ -85,7 +86,7 @@ export default class App extends React.Component<Props> {
               </Text>
             </View>
           }
-          </ScrollView>
+          </LazyloadScrollView>
         </ImageBackground>
     );
   }

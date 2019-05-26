@@ -6,6 +6,7 @@ import {
     View,
     Image,
 } from 'react-native'
+import { LazyloadView, LazyloadImage } from 'react-native-lazyload-deux';
 import {LinearGradient} from "expo";
 import { withNavigation } from 'react-navigation';
 
@@ -21,17 +22,17 @@ class Items extends React.Component<Props> {
         const data = this.props.data;
 
         return (
-            <View style={styles.container}>
+            <LazyloadView style={styles.container}>
 
                 <TouchableOpacity style={styles.button} onPress={() => this.onPress(data)}>
 
-                        <Image style={styles.image} source={require('../../public/materials/example.jpeg')}/>
+                        <Image style={styles.image} source={require('../../public/materials/example.jpeg')}></Image>
                         <Text style={styles.titleText} numberOfLines={2}>{data.title}</Text>
                         <Text numberOfLines={1} style={styles.link}>{data.source}</Text>
 
                 </TouchableOpacity>
 
-            </View>
+            </LazyloadView>
         )
     }
 }
