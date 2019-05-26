@@ -11,8 +11,9 @@ import {
 import { NavigationEvents } from 'react-navigation';
 import { getBookmark } from './API/Pockets';
 import { isLogged } from './scripts/session';
-import { SearchBar, Header, colors } from 'react-native-elements';
+import { SearchBar, Header } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
+
 
 export default class SearchScreen extends React.Component<Props> {
 

@@ -13,20 +13,24 @@ const bgColor = '#1a1a1a';
 
 const HomeStack = createStackNavigator(
     {
-      Home: { screen: Home },
-    },
-    {
-      //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
-      defaultNavigationOptions: {
-        
-        title: 'Home',
-        //Header title
-        headerStyle: {
-          backgroundColor: bgColor,
-        },
-        headerTintColor: 'white',
+      Home: { 
+        screen: Home,
+        navigationOptions: {
+          title: 'Home',
+          //Header title
+          headerStyle: {
+            backgroundColor: bgColor,
+          },
+          headerTintColor: 'white',
+        }, 
       },
-    }
+      DetailView: { 
+        screen: DetailView ,
+        navigationOptions: {
+          headerTransparent: true,
+        }
+      },
+    },
 );
 
 const SearchStack = createStackNavigator(
@@ -85,6 +89,16 @@ SearchStack.navigationOptions = ({ navigation }) => {
   };
 };
 
+HomeStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+  };
+};
 
 /*const App = createMaterialBottomTabNavigator(
     {

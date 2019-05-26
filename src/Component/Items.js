@@ -7,18 +7,19 @@ import {
     Image,
 } from 'react-native'
 import {LinearGradient} from "expo";
+import { withNavigation } from 'react-navigation';
 
 const margin = 10;
 
-export class Items extends Component {
+class Items extends React.Component<Props> {
 
-
-    onPress = (data) => {
-        console.log(data);
+    onPress = (item) => {
+        this.props.navigation.navigate('DetailView',{data: item});
     }
 
     render() {
         const data = this.props.data;
+
         return (
             <View style={styles.container}>
 
@@ -73,3 +74,5 @@ const styles = StyleSheet.create({
         color:'#eaeae1'
     }
 })
+
+export default withNavigation(Items);

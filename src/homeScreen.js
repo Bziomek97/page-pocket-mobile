@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import { getBookmark } from './API/Pockets';
-import {Items } from "./Component/Items";
+import Items from "./Component/Items";
 import {isLogged} from './scripts/session';
 
 export default class App extends React.Component<Props> {
@@ -19,10 +19,6 @@ export default class App extends React.Component<Props> {
     response: [],
     result: false,
     refreshing: false,
-  }
-
-  componentDidFocus(){
-    console.log('OK');
   }
 
   componentDidMount(){
@@ -55,7 +51,7 @@ export default class App extends React.Component<Props> {
 
   _generateItems = ({item}) => {
     return(
-      <Items data={item} />
+      <Items data={item}/>
     );
   }
 
