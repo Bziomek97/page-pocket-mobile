@@ -9,6 +9,7 @@ import {
 import { LazyloadView, LazyloadImage } from 'react-native-lazyload-deux';
 import {LinearGradient} from "expo";
 import { withNavigation } from 'react-navigation';
+import Base64Loader from '../scripts/Base64Loader';
 
 const margin = 10;
 
@@ -25,10 +26,11 @@ class Items extends React.Component<Props> {
             <LazyloadView style={styles.container}>
 
                 <TouchableOpacity style={styles.button} onPress={() => this.onPress(data)}>
-
-                        <Image style={styles.image} source={require('../../public/materials/example.jpeg')}></Image>
-                        <Text style={styles.titleText} numberOfLines={2}>{data.title}</Text>
-                        <Text numberOfLines={1} style={styles.link}>{data.source}</Text>
+                        <View style={styles.image}>
+                            <Base64Loader image={data.id} />
+                        </View>
+                            <Text style={styles.titleText} numberOfLines={2}>{data.title}</Text>
+                            <Text numberOfLines={1} style={styles.link}>{data.source}</Text>
 
                 </TouchableOpacity>
 
@@ -53,10 +55,12 @@ const styles = StyleSheet.create({
     image: {
         top: margin,
         left: margin,
-        resizeMode: 'stretch',
         width: '94%',
-        height: 175,
+        height: 200,
         borderRadius: 5,
+        backgroundColor: 'white',
+        overflow: 'hidden',
+
     },
     titleText: {
         marginTop: 7.5,

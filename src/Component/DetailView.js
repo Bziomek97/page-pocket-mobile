@@ -1,9 +1,10 @@
 import React from 'react';
 import {StyleSheet, View, Text, Image, StatusBar, TouchableOpacity, Linking} from 'react-native';
-import { LazyloadView,LazyloadImage,LazyloadScrollView } from 'react-native-lazyload-deux';
+import { LazyloadView} from 'react-native-lazyload-deux';
 import {deleteBookmark} from '../API/Pockets';
 import { ScrollView } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Base64Loader from '../scripts/Base64Loader';
 
 const buttonStyle = (color) => {
     return {
@@ -47,11 +48,17 @@ export default class DetailView extends React.Component<Props> {
         const data = this.props.navigation.getParam('data','err');
 
         return(
-            <View style={style.background}>
-                <StatusBar backgroundColor="grey"/>
+            <LazyloadView
+            style={style.background}>
+                <StatusBar hidden/>
                 <View style={style.borderWrapper}>
-                    <Image style={style.image} source={require('../../public/materials/example.jpeg')}/>
+                    <Base64Loader image={data.id} />
                 </View>
+                <View style={{
+                backgroundColor: 'white',
+                height: '60%',
+                borderTopColor: 'black',
+                borderTopWidth: 1,}}>
                 <Text 
                 style ={style.title}
                 numberOfLines={2}
@@ -71,6 +78,7 @@ export default class DetailView extends React.Component<Props> {
                 </View>
                 </View>
             </View>
+            </LazyloadView>
         );
     }
 }
@@ -80,15 +88,12 @@ const style = StyleSheet.create({
         height: '100%',
     },
     borderWrapper:{
-        borderBottomColor: 'black',
+        borderBottomColor: 'white',
         borderBottomWidth: 1,
         width: '100%',
         height: '40%',
-    },
-    image: {
-        width: '100%',
-        height: '100%',
-        resizeMode: 'stretch',
+        top: 0,
+        left: 0,
     },
     title: {
         fontStyle: 'italic',

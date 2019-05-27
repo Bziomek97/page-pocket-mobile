@@ -50,15 +50,6 @@ export default class SearchScreen extends React.Component<Props> {
     this.setState({data: newArray});
   };
 
-  /*componentDidMount() {
-    isLogged()
-    .then(result => {
-      this.props.navigation.setParams({header: null})
-      this.setState({result});
-      if(result) getBookmark().then(response => this.setState({data: response,copyData: response}))
-    })
-  }*/
-
   _updater = () => {
     isLogged()
     .then(result => {
@@ -88,7 +79,7 @@ export default class SearchScreen extends React.Component<Props> {
     return(<SearchBar          
       round
       searchIcon={{ size: 24 }}
-      placeholder="Search bookmarks by tags..."
+      placeholder="Search bookmarks by tag..."
       onChangeText={this._onChange}
       value={this.state.search}
       onClear={text => this.setState({search: text,data: this.state.copyData})}
@@ -97,10 +88,6 @@ export default class SearchScreen extends React.Component<Props> {
   }
 
   _onPress = (item) => {
-    /*const url = (!(/(http|https):\/\//).test(item.source)) ? 'http://'+item.source: item.source;
-    Linking.canOpenURL(url).then(supported => {
-      if(supported) Linking.openURL(url);
-    });*/
     this.props.navigation.navigate('DetailView',{data: item});
   }
   

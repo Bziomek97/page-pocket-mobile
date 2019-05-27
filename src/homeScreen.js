@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   StyleSheet,
-  ScrollView,
   FlatList,
   ImageBackground,
   Text,
@@ -73,7 +72,8 @@ export default class App extends React.Component<Props> {
               refreshing={this.state.refreshing}
               onRefresh={this._onRefresh}
             />
-          }>
+          }
+          showsVerticalScrollIndicator={false}>
           {
           (this.state.result) ?
             <FlatList
