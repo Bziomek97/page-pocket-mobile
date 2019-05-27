@@ -5,13 +5,13 @@ import {
   View,
   FlatList,
   ImageBackground,
-  TouchableOpacity,
 } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import { LazyloadScrollView, LazyloadView } from 'react-native-lazyload-deux';
 import { getBookmark } from './API/Pockets';
 import { isLogged } from './scripts/session';
 import { SearchBar, Header } from 'react-native-elements';
+import SearchItem from './Component/SearchItem';
 
 
 export default class SearchScreen extends React.Component<Props> {
@@ -35,6 +35,7 @@ export default class SearchScreen extends React.Component<Props> {
   }
 
   state = {
+    data: [],
     search: "",
     result: false,
   }
@@ -85,23 +86,16 @@ export default class SearchScreen extends React.Component<Props> {
       containerStyle={styles.input}
     />);
   }
-
-  _onPress = (item) => {
-    this.props.navigation.navigate('DetailView',{data: item});
-  }
   
-  _renderItem = ({item}) => {
+  _generateItems = ({item}) => {
     return(
-      <TouchableOpacity onPress={() => this._onPress(item)}
-      style={styles.row}>
-      <Text>{item.title}</Text>
-      </TouchableOpacity>
+      <SearchItem data={item}/>
     );
   }
 
   render() {
 
-    const { search, data } = this.state;
+    const data = this.state.data;
 
     if(this.state.result)
     return (
@@ -121,7 +115,7 @@ export default class SearchScreen extends React.Component<Props> {
             <LazyloadScrollView style={styles.flatList}>
               <FlatList
                 data={data}
-                renderItem={this._renderItem}
+                renderItem={this._generateItems}
               >
               </FlatList>
               </LazyloadScrollView>
@@ -150,8 +144,8 @@ export default class SearchScreen extends React.Component<Props> {
     container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'flex-start',
-      backgroundColor: '#7c7b7d'
+    justifyContent: 'center',
+    backgroundColor: '#e0e0e0'
   },
   contentTxt: {
     fontSize: 25,
@@ -186,8 +180,7 @@ export default class SearchScreen extends React.Component<Props> {
   },
   flatList:{
     flex: 1,
-    backgroundColor: 'white',
     alignItems: 'stretch',
-    width: '100%',
+    width: '95%',
   }
 });
