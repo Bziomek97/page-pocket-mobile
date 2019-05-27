@@ -65,7 +65,7 @@ export default class SignUp extends React.Component<Props> {
             Alert.alert(err.message);
             return;
         }
-        this.props.navigation.navigate('Home');
+        this.props.navigation.goBack();
     };
 
     render() {
