@@ -151,6 +151,7 @@ export default class SearchScreen extends React.Component<Props> {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
+      backgroundColor: '#7c7b7d'
   },
   contentTxt: {
     fontSize: 25,
@@ -160,7 +161,8 @@ export default class SearchScreen extends React.Component<Props> {
       width: '100%',
       fontSize: 18,
       backgroundColor: "transparent",
-      borderColor: 'black',
+      borderColor: 'transparent',
+    height: '97%'
   },
   row: {
     backgroundColor: 'rgba(154,154,154,0.5)',

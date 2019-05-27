@@ -4,6 +4,6 @@
   "packagerNgrokUrl": "https://packager.7w-3wy.anonymous.page-pocket-mobile.exp.direct",
   "ngrokPid": 1604,
   "devToolsPort": 19002,
+  "expoServerPort": 8044,
   "packagerPort": 19001,
-  "packagerPid": 1524
 }
