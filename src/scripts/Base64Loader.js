@@ -38,16 +38,13 @@ export default class Base64Loader extends Component<Props>{
     }
 }
 
-//style= {(this.state.response) ? ((this.props.comp === 'Item') ? style.imageHome : style.image) : style.placeholder}
-
 const style = StyleSheet.create({
     loading: {
         resizeMode: 'stretch',
-        width: '50%',
-        height: '60%',
+        width: 100,
+        height: 100,
         overflow: 'hidden',
-        top: '25%',
-        left: '25%'
+        alignSelf: 'center',
     },
     image: {
         resizeMode: 'stretch',
