@@ -5,13 +5,11 @@ import {
     Text,
     ImageBackground,
     StyleSheet,
-    Alert,
     Dimensions,
     View
 } from 'react-native';
 import { logout } from './API/Users'
-import { isLogged , clearSession, getSessionId, saveSessionId} from './scripts/session'
-import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
+import { isLogged , clearSession, getSessionId, saveSessionId} from './scripts/session';
 import { LinearGradient } from 'expo';
 
 
@@ -82,24 +80,19 @@ export default class AccountScreen extends React.Component<Props> {
     render() {
         return(
         <ImageBackground source={require("../public/materials/background.jpg")}
-
-        style={styles.container}>
-
+            style={styles.container}
+        >
             <LinearGradient
-                colors={['rgba(255,255,255,0.2)', 'rgba(255,255,255,0)']}>
-            <View style={styles.gradient}>
+                colors={['rgba(255,255,255,0.2)', 'rgba(255,255,255,0)']}
+            >
+                <View style={styles.gradient}>
 
-            <FlatList
-                    //Lista elementow
+                <FlatList
                     data={this.state.listItem}
-                    //Co ma renderowac
                     renderItem={this._renderItem}
                 />
-
-
-            </View>
+                </View>
             </LinearGradient>
-
         </ImageBackground>
         );
     }

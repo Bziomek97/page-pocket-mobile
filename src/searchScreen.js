@@ -4,7 +4,6 @@ import {
   Text,
   View,
   FlatList,
-  Linking,
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
@@ -132,14 +131,14 @@ export default class SearchScreen extends React.Component<Props> {
   else return (
     <ImageBackground
           source={require("../public/materials/background.jpg")}
-          style={{width: '100%', height: '100%'}}>
+          style={{width: '100%', height: '100%', flex: 1, justifyContent: 'center', alignItems: 'center'}}>
 
         <NavigationEvents
           onDidFocus = {() => {this._updater()}}
         />  
             <LazyloadView style={styles.info}>
               <Text style={styles.contentTxt}>
-                You must logged or registered to see your bookmarks or if u logged, you swipe down.
+                You have to login or register to search your bookmarks.
               </Text>
             </LazyloadView>
         </ImageBackground>
@@ -176,20 +175,16 @@ export default class SearchScreen extends React.Component<Props> {
     color: 'white'
   },
   info:{
-    flex: 0.23,
-    alignItems: 'stretch',
     width: '95%',
-    left: '2.5%',
     borderColor: 'rgba(0,0,0,0.8)',
     borderWidth: 2,
     borderStyle: 'solid',
     borderRadius: 5,
     backgroundColor: 'rgba(154,154,154,0.5)',
-    marginTop: '52%',
   },
   flatList:{
     flex: 1,
-    backgroundColor: 'white', // Pick
+    backgroundColor: 'white',
     alignItems: 'stretch',
     width: '100%',
   }

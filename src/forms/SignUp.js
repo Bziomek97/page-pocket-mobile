@@ -22,7 +22,7 @@ import { saveSessionId } from '../scripts/session';
 export default class SignUp extends React.Component<Props> {
 
     static navigationOptions = ({ navigation }) => ({
-        title: 'Registration',
+        title: 'Sign up',
         
     });
 
@@ -41,13 +41,13 @@ export default class SignUp extends React.Component<Props> {
         const cpassw = this.state.confirmPassw;
         const email = this.state.data.email;
 
-        if (passw === undefined || passw === '' || cpassw === undefined || cpassw === '' ) throw {message: "Hasło lub jego potwierdzenie jest wymagane" };
+        if (passw === undefined || passw === '' || cpassw === undefined || cpassw === '' ) throw {message: "Password required!" };
 
         if (passw.localeCompare(cpassw) !== 0) throw {message: "Passwords have to be identical" };
 
         const emailRegex = /((\w|\.)+)@(\w+)(\.\w{2,3}){1,}/;
 
-        if(!(email.match(emailRegex))) throw {message: "Wrong E-mail"};
+        if(!(email.match(emailRegex))) throw {message: "Incorrect Email! Propably by syntax."};
 
     };
 
@@ -59,12 +59,11 @@ export default class SignUp extends React.Component<Props> {
     signUp = async () => {
         try {
             this.onValid();
-            // here place your signup logic
             const response = await register(this.state.data);
             saveSessionId(response);
-            Alert.alert('Success of registration');
+            Alert.alert('Welcome!','We are glad to say \'HI\' new user!');
         } catch (err) {
-            Alert.alert(err.message);
+            Alert.alert('Have you some trouble with register!',err.message);
             return;
         }
         this.props.navigation.goBack();

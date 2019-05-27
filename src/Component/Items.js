@@ -1,13 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
     StyleSheet,
     TouchableOpacity,
     Text,
     View,
-    Image,
 } from 'react-native'
-import { LazyloadView, LazyloadImage } from 'react-native-lazyload-deux';
-import {LinearGradient} from "expo";
+import { LazyloadView } from 'react-native-lazyload-deux';
 import { withNavigation } from 'react-navigation';
 import Base64Loader from '../scripts/Base64Loader';
 
