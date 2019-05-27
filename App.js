@@ -6,8 +6,8 @@ import { logout } from './src/API/Users';
 export default class App extends React.Component {
 
   componentDidMount(){
-    clearSession();
-    logout();
+    //clearSession();
+    //logout();
   }
 
   render() {
