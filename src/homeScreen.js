@@ -60,33 +60,36 @@ export default class App extends React.Component<Props> {
     return (
       <ImageBackground
           source={require("../public/materials/background.jpg")}
-          style={{width: '100%', height: '100%'}}>
+          style={{width: '100%', height: '100%',
+          flex: 1, 
+          justifyContent: 'center',
+          alignItems: 'center',}}>
 
           <NavigationEvents
             onDidFocus={() => {this._updater()}}
           />
-          <LazyloadScrollView
-          style={styles.container}
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh}
-            />
-          }
-          showsVerticalScrollIndicator={false}>
           {
           (this.state.result) ?
+            <LazyloadScrollView
+            style={styles.container}
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this._onRefresh}
+              />
+            }
+            showsVerticalScrollIndicator={false}>
             <FlatList
             data={this.state.response}
             renderItem={this._generateItems}/>
+            </LazyloadScrollView>
             :
             <View style={styles.info}>
               <Text style={styles.contentTxt}>
-                You must logged or registered to see your bookmarks or if u logged, you swipe down.
+                You have to login or register to see your bookmarks or if u logged, you swipe down to refresh.
               </Text>
             </View>
           }
-          </LazyloadScrollView>
         </ImageBackground>
     );
   }
@@ -94,10 +97,8 @@ export default class App extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.8,
-    alignItems: 'stretch',
     width: '95%',
-    left: '2.5%',
+    height: '100%'
   },
   contentTxt: {
     fontSize: 18,
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderRadius: 5,
     backgroundColor: 'rgba(154,154,154,0.5)',
-    marginTop: '55%',
+    width: '95%',
   }
 
 
