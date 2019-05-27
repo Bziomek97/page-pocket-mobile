@@ -1,23 +1,37 @@
 import React, {Component} from 'react';
-import {LazyloadImage} from 'react-native-lazyload-deux';
-import {Image, StyleSheet} from 'react-native'
+import {Image, StyleSheet, ImageEditor} from 'react-native';
+import FitImage from 'react-native-fit-image';
+import {getBookmark} from '../API/Pockets';
 
+  
 
 export default class Base64Loader extends Component<Props>{
 
+    state = {
+        img: require('../../public/materials/example.jpeg'),
+        response: false,
+    }
+
     _imgLoader = (img) => {
-        if(img !== null || typeof img !== undefined)
-        return `data:image/jpeg;base64,${img}`;
+        if(img !== null && typeof img !== undefined)
+        this.setState({img:`data:image/png;base64,${img}`});
         else
-        return /* require image placeholder*/;
+        this.setState({img: require('../../public/materials/example.jpeg')});
     }
 
     render(){
-        const src = _imgLoader(this.props.image);
+        getBookmark(this.props.image)
+        .then(response => {
+            if(response.blob === null) this.setState({response: false});
+            else this.setState({response: true});
+            this._imgLoader(response.blob);
+            //if(response.blob !== null) ImageEditor.cropImage(this.state.img,crop);
+        })
+
         return(
-            <LazyloadImage 
-                style= {style.image}
-                source={{uri: src}}
+            <Image
+                style= {(this.state.response) ? style.image : style.placeholder}
+                source={(this.state.response) ? {uri: this.state.img} : this.state.img}
             />
         );
     }
@@ -25,6 +39,13 @@ export default class Base64Loader extends Component<Props>{
 
 const style = StyleSheet.create({
     image: {
-        /* Fill soon */
+        resizeMode: 'stretch',
+        width: '100%',
+        height: '400%',
+    },
+    placeholder: {
+        resizeMode: 'stretch',
+        width: '100%',
+        height: '100%',
     }
 });
