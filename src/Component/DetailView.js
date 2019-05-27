@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Text, Image, StatusBar, TouchableOpacity, Linking} from 'react-native';
-import { LazyloadView,LazyloadImage,LazyloadScrollView } from 'react-native-lazyload-deux';
-import {deleteBookmark,getBookmark} from '../API/Pockets';
+import { LazyloadView} from 'react-native-lazyload-deux';
+import {deleteBookmark} from '../API/Pockets';
 import { ScrollView } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Base64Loader from '../scripts/Base64Loader';
@@ -48,7 +48,8 @@ export default class DetailView extends React.Component<Props> {
         const data = this.props.navigation.getParam('data','err');
 
         return(
-            <View style={style.background}>
+            <LazyloadView
+            style={style.background}>
                 <StatusBar hidden/>
                 <View style={style.borderWrapper}>
                     <Base64Loader image={data.id} />
@@ -77,7 +78,7 @@ export default class DetailView extends React.Component<Props> {
                 </View>
                 </View>
             </View>
-            </View>
+            </LazyloadView>
         );
     }
 }
@@ -87,7 +88,7 @@ const style = StyleSheet.create({
         height: '100%',
     },
     borderWrapper:{
-        borderBottomColor: 'black',
+        borderBottomColor: 'white',
         borderBottomWidth: 1,
         width: '100%',
         height: '40%',

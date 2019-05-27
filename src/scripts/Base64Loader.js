@@ -1,12 +1,23 @@
 import React, {Component} from 'react';
-import {Image, StyleSheet, ImageEditor, ImageStore} from 'react-native';
+import {Image, StyleSheet} from 'react-native';
 import {getBookmark} from '../API/Pockets';
 
 export default class Base64Loader extends Component<Props>{
 
     state = {
-        img: require('../../public/materials/example.jpeg'),
+        img: require('../../public/materials/loading.gif'),
+        loading: true,
         response: false,
+    }
+
+    componentDidMount(){
+        getBookmark(this.props.image)
+        .then(response => {
+            if(response.blob === null) this.setState({response: false});
+            else this.setState({response: true});
+            this._imgLoader(response.blob);
+            this.setState({loading: false});
+        })
     }
 
     _imgLoader = (img) => {
@@ -17,16 +28,10 @@ export default class Base64Loader extends Component<Props>{
     }
 
     render(){
-        getBookmark(this.props.image)
-        .then(response => {
-            if(response.blob === null) this.setState({response: false});
-            else this.setState({response: true});
-            this._imgLoader(response.blob);
-        })
 
         return(
             <Image
-                style= {(this.state.response) ? style.image : style.placeholder}
+                style= {(this.state.response) ? style.image : ((this.state.loading) ? style.loading : style.placeholder)}
                 source={(this.state.response) ? {uri: this.state.img} : this.state.img}
             />
         );
@@ -36,11 +41,18 @@ export default class Base64Loader extends Component<Props>{
 //style= {(this.state.response) ? ((this.props.comp === 'Item') ? style.imageHome : style.image) : style.placeholder}
 
 const style = StyleSheet.create({
+    loading: {
+        resizeMode: 'stretch',
+        width: '50%',
+        height: '60%',
+        overflow: 'hidden',
+        top: '25%',
+        left: '25%'
+    },
     image: {
         resizeMode: 'stretch',
         width: '100%',
         height: '350%',
-        overflow: 'hidden',
     },
     placeholder: {
         resizeMode: 'stretch',
