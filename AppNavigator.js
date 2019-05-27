@@ -1,43 +1,48 @@
 import React from 'react';
-import Home from './src/Home';
+import Home from './src/homeScreen';
 import AccountScreen from './src/accountScreen'
 import SignUp from './src/forms/SignUp';
 import SignIn from './src/forms/SignIn';
 import SearchScreen from './src/searchScreen';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import DetailView from './src/Component/DetailView';
 import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
-import { SearchBar } from 'react-native-elements';
-import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom-tabs";
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 //Background Color
 const bgColor = '#1a1a1a';
 
 const HomeStack = createStackNavigator(
     {
-      Home: { screen: Home },
-    },
-    {
-      //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
-      defaultNavigationOptions: {
-        
-        title: 'Home',
-        //Header title
-        headerStyle: {
-          backgroundColor: bgColor,
-        },
-        headerTintColor: 'white',
+      Home: { 
+        screen: Home,
+        navigationOptions: {
+          title: 'Home',
+          //Header title
+          headerStyle: {
+            backgroundColor: bgColor,
+          },
+          headerTintColor: 'white',
+        }, 
       },
-    }
+      DetailView: { 
+        screen: DetailView ,
+        navigationOptions: {
+          headerTransparent: true,
+        }
+      },
+    },
 );
 
 const SearchStack = createStackNavigator(
     {
-      Search: { screen: SearchScreen },
-    },
-    {
-      //For React Navigation 2.+ change defaultNavigationOptions->navigationOptions
-      defaultNavigationOptions: {
-        header: null,
+      Search: { 
+        screen: SearchScreen,
+      },
+      DetailView: { 
+        screen: DetailView ,
+        navigationOptions: {
+          headerTransparent: true,
+        }
       },
     },
 );
@@ -73,6 +78,27 @@ ProfileStack.navigationOptions = ({ navigation }) => {
   };
 };
 
+SearchStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+  };
+};
+
+HomeStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+  };
+};
 
 /*const App = createMaterialBottomTabNavigator(
     {

@@ -1,101 +1,81 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
     StyleSheet,
     TouchableOpacity,
     Text,
     View,
-    Image,
 } from 'react-native'
-import {LinearGradient} from "expo";
+import { LazyloadView } from 'react-native-lazyload-deux';
+import { withNavigation } from 'react-navigation';
+import Base64Loader from '../scripts/Base64Loader';
 
-export class Items extends Component {
-    constructor(props) {
-        super(props)
-        this.state = { count: 0 }
-    }
+const margin = 10;
 
-    onPress = () => {
-        this.setState({
-            count: this.state.count+1
-        })
+class Items extends React.Component<Props> {
+
+    onPress = (item) => {
+        this.props.navigation.navigate('DetailView',{data: item});
     }
 
     render() {
+        const data = this.props.data;
+
         return (
-            <View style={styles.container}>
+            <LazyloadView style={styles.container}>
 
-                <TouchableOpacity style={styles.button} onPress={this.onPress}>
-
-
-
-                        <Image style={[styles.image]} source={require('../../public/materials/example.jpeg')}/>
-
-                        <Text style={[styles.titleText]}>My Page </Text>
-
-                        <Text numberOfLines={1} style={[styles.hasztag]}>#polishboy #polishgirl #polishboys #polishgirls
-                            #polskichlopak #polskadziewczyna #polskichłopak #polishmen #polskifacet #firefighter #firefight
-                            #firebrigade #fire #straz #strazackie #pozarna #strażpożarna #straż #strażak</Text>
-
-                        <Text numberOfLines={3} style={[styles.descriptionText]}>enabled: If true, parallax effects are
-                            enabled. Defaults to true. shiftDistanceX: Defaults to 2.0. shiftDistanceY: Defaults to 2.0.
-                            tiltAngle: Defaults to 0.05. magnification: Defaults to 1.0. pressMagnification: Defaults to
-                            1.0. pressDuration: Defaults to 0.3. pressDelay: Defaults to 0.0.</Text>
-                        <Text numberOfLines={1} style={[styles.link]}>https://youtu.be/MwTbFT7wMM8?t=2624</Text>
+                <TouchableOpacity style={styles.button} onPress={() => this.onPress(data)}>
+                        <View style={styles.image}>
+                            <Base64Loader image={data.id} />
+                        </View>
+                            <Text style={styles.titleText} numberOfLines={2}>{data.title}</Text>
+                            <Text numberOfLines={1} style={styles.link}>{data.source}</Text>
 
                 </TouchableOpacity>
 
-            </View>
+            </LazyloadView>
         )
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        width:'100%',
+        flex: 0.51,
         flexDirection: 'column',
-        justifyContent: 'center',
-        paddingHorizontal: 10,
-    },
-    button: {
-        borderRadius:5,
-        alignItems: 'center',
+        justifyContent: 'space-between',
+        borderColor: 'rgba(0,0,0,0.8)',
+        borderWidth: 2,
+        borderStyle: 'solid',
+        borderRadius: 5,
         backgroundColor: 'rgba(154,154,154,0.5)',
-        padding: 0
+        marginTop: 10,
+        marginBottom: 2.5,
     },
-    countText: {
-        color: '#FFFFFF'
-    },
-   image: {
-       resizeMethod:'resize',
-       borderTopLeftRadius: 5,
-       borderTopRightRadius: 5,
-       height:75 ,
-       width:'100%',
-   },
-    titleText: {
-        color: 'white',
-        fontSize:20,
-        alignItems: 'center',
-        width:'100%',
-    },
-    descriptionText: {
-        color: 'white',
+    image: {
+        top: margin,
+        left: margin,
+        width: '94%',
+        height: 200,
+        borderRadius: 5,
+        backgroundColor: 'white',
+        overflow: 'hidden',
 
     },
-    hasztag: {
+    titleText: {
+        marginTop: 7.5,
+        left: margin,
         color: 'white',
-        fontSize: 8,
-        borderBottomColor: 'gray',
-        borderBottomWidth: 1,
+        fontSize:30,
+        fontStyle: 'italic',
+        fontWeight: 'bold',
+        width:'100%',
     },
     link: {
-        color: 'black',
+        left: margin,
         size: 5,
-        borderBottomLeftRadius: 5,
-        borderBottomRightRadius: 5,
-        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+        marginBottom: 15,
         width:'100%',
-        alignItems: 'center',
-
+        color:'#eaeae1'
     }
 })
+
+export default withNavigation(Items);

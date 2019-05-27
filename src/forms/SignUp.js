@@ -10,17 +10,19 @@ import {
     Alert
 } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { LazyloadView } from 'react-native-lazyload-deux';
+
 import { register } from '../API/Users';
 import { LinearGradient } from 'expo';
 
 var height = Dimensions.get('window').height;
 var width = Dimensions.get('window').width;
-import { saveSessionId } from '../session';
+import { saveSessionId } from '../scripts/session';
 
 export default class SignUp extends React.Component<Props> {
 
     static navigationOptions = ({ navigation }) => ({
-        title: 'Registration',
+        title: 'Sign up',
         
     });
 
@@ -39,13 +41,13 @@ export default class SignUp extends React.Component<Props> {
         const cpassw = this.state.confirmPassw;
         const email = this.state.data.email;
 
-        if (passw === undefined || passw === '' || cpassw === undefined || cpassw === '' ) throw {message: "Hasło lub jego potwierdzenie jest wymagane" };
+        if (passw === undefined || passw === '' || cpassw === undefined || cpassw === '' ) throw {message: "Password required!" };
 
         if (passw.localeCompare(cpassw) !== 0) throw {message: "Passwords have to be identical" };
 
         const emailRegex = /((\w|\.)+)@(\w+)(\.\w{2,3}){1,}/;
 
-        if(!(email.match(emailRegex))) throw {message: "Wrong E-mail"};
+        if(!(email.match(emailRegex))) throw {message: "Incorrect Email! Propably by syntax."};
 
     };
 
@@ -57,15 +59,14 @@ export default class SignUp extends React.Component<Props> {
     signUp = async () => {
         try {
             this.onValid();
-            // here place your signup logic
             const response = await register(this.state.data);
             saveSessionId(response);
-            Alert.alert('Success of registration');
+            Alert.alert('Welcome!','We are glad to say \'HI\' new user!');
         } catch (err) {
-            Alert.alert(err.message);
+            Alert.alert('Have you some trouble with register!',err.message);
             return;
         }
-        this.props.navigation.navigate('Home');
+        this.props.navigation.goBack();
     };
 
     render() {
@@ -82,7 +83,7 @@ export default class SignUp extends React.Component<Props> {
                 style={styles.container}
             >
 
-                    <View style={styles.gradient}>
+                    <LazyloadView style={styles.gradient}>
                     <LinearGradient
                         colors={['rgba(255,255,255,0.2)', 'rgba(255,255,255,0)']}>
 
@@ -133,20 +134,13 @@ export default class SignUp extends React.Component<Props> {
                     </TouchableHighlight>
 
             </LinearGradient>
-                    </View>
+                    </LazyloadView>
             </KeyboardAwareScrollView>
 
             </ImageBackground>)
     }
 }
 
-/*
-                    <Button
-                        title='Sign Up'
-                        style = {styles.button}
-                        onPress={this.signUp}
-                    />
- */
 const styles = StyleSheet.create({
     text: {
         color:  'white',
