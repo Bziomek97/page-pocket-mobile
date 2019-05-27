@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import {Image, StyleSheet, ImageEditor} from 'react-native';
-import FitImage from 'react-native-fit-image';
+import {Image, StyleSheet, ImageEditor, ImageStore} from 'react-native';
 import {getBookmark} from '../API/Pockets';
-
-  
 
 export default class Base64Loader extends Component<Props>{
 
@@ -25,7 +22,6 @@ export default class Base64Loader extends Component<Props>{
             if(response.blob === null) this.setState({response: false});
             else this.setState({response: true});
             this._imgLoader(response.blob);
-            //if(response.blob !== null) ImageEditor.cropImage(this.state.img,crop);
         })
 
         return(
@@ -37,15 +33,19 @@ export default class Base64Loader extends Component<Props>{
     }
 }
 
+//style= {(this.state.response) ? ((this.props.comp === 'Item') ? style.imageHome : style.image) : style.placeholder}
+
 const style = StyleSheet.create({
     image: {
         resizeMode: 'stretch',
         width: '100%',
-        height: '400%',
+        height: '350%',
+        overflow: 'hidden',
     },
     placeholder: {
         resizeMode: 'stretch',
-        width: '100%',
-        height: '100%',
+        width: '150%',
+        height: '150%',
+        overflow: 'hidden',
     }
 });

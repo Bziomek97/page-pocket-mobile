@@ -53,7 +53,7 @@ export default class DetailView extends React.Component<Props> {
                 <View style={style.borderWrapper}>
                     <Base64Loader image={data.id} />
                 </View>
-                <View style={{zIndex: 1,
+                <View style={{
                 backgroundColor: 'white',
                 height: '60%',
                 borderTopColor: 'black',
@@ -87,14 +87,12 @@ const style = StyleSheet.create({
         height: '100%',
     },
     borderWrapper:{
-        position: 'relative',
         borderBottomColor: 'black',
         borderBottomWidth: 1,
         width: '100%',
         height: '40%',
         top: 0,
         left: 0,
-        zIndex:0,
     },
     title: {
         fontStyle: 'italic',
