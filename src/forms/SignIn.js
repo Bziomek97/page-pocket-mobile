@@ -12,17 +12,18 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { login } from '../API/Users';
 import { LinearGradient } from 'expo';
+import { LazyloadView } from 'react-native-lazyload-deux';
 // import { Text, View, StyleSheet } from 'react-native';
 //import { Constants } from 'expo';
 
 var height = Dimensions.get('window').height;
 var width = Dimensions.get('window').width;
-import { saveSessionId } from '../session';
+import { saveSessionId } from '../scripts/session';
 
 export default class SignIn extends React.Component<Props> {
 
     static navigationOptions = ({ navigation }) => ({
-        title: 'Login',
+        title: 'Sign in',
     });
 
     state = {
@@ -34,11 +35,11 @@ export default class SignIn extends React.Component<Props> {
         const passw = this.state.password;
         const email = this.state.email;
 
-        if (passw === undefined || passw === '') throw {message: "Hasło jest wymagane" };
+        if (passw === undefined || passw === '') throw {message: "Password required!" };
 
         const emailRegex = /((\w|\.)+)@(\w+)(\.\w{2,3}){1,}/;
 
-        if(!(email.match(emailRegex))) throw {message: "Wrong E-mail"};
+        if(!(email.match(emailRegex))) throw {message: "Incorrect email! (Syntax or not exist)"};
 
     };
 
@@ -49,13 +50,12 @@ export default class SignIn extends React.Component<Props> {
     signUp = async () => {
         try {
             this.onValid();
-            // here place your signup logic
             const response = await login(this.state);
             saveSessionId(response);
-            Alert.alert('Success of login');
+            Alert.alert('Congratulation!','You are successful login!');
             this.props.navigation.goBack();
         } catch (err) {
-            Alert.alert(err.message);
+            Alert.alert('Something go wrong with login.',err.message);
             return;
         }
     };
@@ -74,7 +74,7 @@ export default class SignIn extends React.Component<Props> {
                 style={styles.container}
             >
 
-                <View style={styles.gradient}>
+                <LazyloadView style={styles.gradient}>
                     <LinearGradient
                         colors={['rgba(255,255,255,0.2)', 'rgba(255,255,255,0)']}>
 
@@ -90,7 +90,7 @@ export default class SignIn extends React.Component<Props> {
                     />
                     <TextInput
                         style={styles.input}
-                        placeholder='Hasło'
+                        placeholder='Password'
                         secureTextEntry={true}
                         autoCapitalize="none"
                         placeholderTextColor='darkgrey'
@@ -104,7 +104,7 @@ export default class SignIn extends React.Component<Props> {
                     </TouchableHighlight>
 
                     </LinearGradient>
-                </View>
+                </LazyloadView>
 
             </KeyboardAwareScrollView>
 
@@ -112,13 +112,6 @@ export default class SignIn extends React.Component<Props> {
     }
 }
 
-/*
-                    <Button
-                        title='Sign Up'
-                        style = {styles.button}
-                        onPress={this.signUp}
-                    />
- */
 const styles = StyleSheet.create({
     text: {
         color:  'white',

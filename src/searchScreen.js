@@ -4,19 +4,39 @@ import {
   Text,
   View,
   FlatList,
-  Linking,
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
+import { NavigationEvents } from 'react-navigation';
+import { LazyloadScrollView, LazyloadView } from 'react-native-lazyload-deux';
 import { getBookmark } from './API/Pockets';
-import { SearchBar, Header, colors } from 'react-native-elements';
-import { ScrollView } from 'react-native-gesture-handler';
+import { isLogged } from './scripts/session';
+import { SearchBar, Header } from 'react-native-elements';
+
 
 export default class SearchScreen extends React.Component<Props> {
 
+  static navigationOptions = ({navigation}) => {
+    const login = navigation.getParam('login');
+    if(login){
+      return {
+        header: null,
+      }
+    }
+    else {
+      return {
+        title: "Search",
+        headerStyle: {
+          backgroundColor: '#1a1a1a',
+        },
+        headerTintColor: 'white',
+      }
+    }
+  }
 
   state = {
     search: "",
+    result: false,
   }
 
 
@@ -29,11 +49,20 @@ export default class SearchScreen extends React.Component<Props> {
     this.setState({data: newArray});
   };
 
-  componentWillMount() {
-    getBookmark()
-    .then(response => {
-      this.setState({data: response,copyData: response});
-    });
+  _updater = () => {
+    isLogged()
+    .then(result => {
+      this.setState({result});
+      if(result) {
+        this.props.navigation.setParams({login: result});
+        getBookmark().then(response => this.setState({data: response,copyData: response}));
+      }
+      else { 
+        this.props.navigation.setParams({
+          login: result
+        });
+        this.setState({data:[],copyData:[]});
+      }})
   }
 
   _onChange = (search) => {
@@ -49,7 +78,7 @@ export default class SearchScreen extends React.Component<Props> {
     return(<SearchBar          
       round
       searchIcon={{ size: 24 }}
-      placeholder="Search bookmarks by tags..."
+      placeholder="Search bookmarks by tag..."
       onChangeText={this._onChange}
       value={this.state.search}
       onClear={text => this.setState({search: text,data: this.state.copyData})}
@@ -58,10 +87,7 @@ export default class SearchScreen extends React.Component<Props> {
   }
 
   _onPress = (item) => {
-    const url = (!(/(http|https):\/\//).test(item.source)) ? 'http://'+item.source: item.source;
-    Linking.canOpenURL(url).then(supported => {
-      if(supported) Linking.openURL(url);
-    });
+    this.props.navigation.navigate('DetailView',{data: item});
   }
   
   _renderItem = ({item}) => {
@@ -77,26 +103,46 @@ export default class SearchScreen extends React.Component<Props> {
 
     const { search, data } = this.state;
 
+    if(this.state.result)
     return (
-          <View style={styles.container}>
-            <Header
+        <View style={styles.container}>
+        <NavigationEvents
+          onDidFocus = {() => {this._updater()}}
+          onDidBlur = {() => {this.setState({search: ""})}}
+        />
+          <Header
               placement="left"
               centerComponent={this._searchBar()}
               leftComponentStyle={{width: 0}}
               centerContainerStyle={{ width: '100%', paddingHorizontal: 0}}
               rightComponentStyle={{width: 0}}
               containerStyle={{ backgroundColor: '#1a1a1a', borderBottomWidth: 0}}
-            >
-            </Header>
-            <ScrollView>
+            />
+            <LazyloadScrollView style={styles.flatList}>
               <FlatList
                 data={data}
                 renderItem={this._renderItem}
               >
               </FlatList>
-              </ScrollView>
-          </View>
+              </LazyloadScrollView>
+
+        </View>
     );
+  else return (
+    <ImageBackground
+          source={require("../public/materials/background.jpg")}
+          style={{width: '100%', height: '100%', flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+
+        <NavigationEvents
+          onDidFocus = {() => {this._updater()}}
+        />  
+            <LazyloadView style={styles.info}>
+              <Text style={styles.contentTxt}>
+                You have to login or register to search your bookmarks.
+              </Text>
+            </LazyloadView>
+        </ImageBackground>
+  );
   }
 }
 
@@ -124,4 +170,24 @@ export default class SearchScreen extends React.Component<Props> {
     marginTop: 1,
     marginBottom: 1,
   },
+  contentTxt: {
+    fontSize: 18,
+    marginBottom: 8,
+    textAlign: 'center',
+    color: 'white'
+  },
+  info:{
+    width: '95%',
+    borderColor: 'rgba(0,0,0,0.8)',
+    borderWidth: 2,
+    borderStyle: 'solid',
+    borderRadius: 5,
+    backgroundColor: 'rgba(154,154,154,0.5)',
+  },
+  flatList:{
+    flex: 1,
+    backgroundColor: 'white',
+    alignItems: 'stretch',
+    width: '100%',
+  }
 });

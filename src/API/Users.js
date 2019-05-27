@@ -19,8 +19,8 @@ export const register = async (state) => {
 export const login = async (state) => {
     try{
         const response = await axios.post(`${baseUrl}/login`,null,{params: {
-            'email': state.email,
-            'password': state.password
+            "email": `${state.email}`,
+            "password": `${state.password}`
         }})
         return response.data;
     }
