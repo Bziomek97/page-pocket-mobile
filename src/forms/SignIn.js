@@ -74,14 +74,14 @@ export default class SignIn extends React.Component<Props> {
                 style={styles.container}
             >
 
-                <LazyloadView style={styles.gradient}>
+                <View style={styles.gradient}>
                     <LinearGradient
                         colors={['rgba(255,255,255,0.2)', 'rgba(255,255,255,0)']}>
 
-                <View>
+                    <Text style={styles.Txt}>Sign In</Text>
 
                     <TextInput
-                        style={styles.input}
+                        style={[styles.input]}
                         placeholder='E-mail'
                         textContentType='emailAddress'
                         autoCapitalize="none"
@@ -96,15 +96,13 @@ export default class SignIn extends React.Component<Props> {
                         placeholderTextColor='darkgrey'
                         onChangeText={val => this.onChangeText('password', val)}
                     />
-                </View>
-
 
                     <TouchableHighlight style={styles.button} onPress = {this.signUp}>
                         <Text style={styles.buttonTxt}>Login</Text>
                     </TouchableHighlight>
-
+                    
                     </LinearGradient>
-                </LazyloadView>
+                </View>
 
             </KeyboardAwareScrollView>
 
@@ -117,11 +115,12 @@ const styles = StyleSheet.create({
         color:  'white',
         height: 50,
         width: 350,
-        fontSize: 18,
-        margin: 16,
+        fontSize: 20,
+        fontWeight: 'bold',
+        //margin: 16,
     },
     input: {
-        alignItems: 'center',
+        //align: 'center',
         color:  'white',
         backgroundColor: 'rgba(154,154,154, 0.8)',
         height: height*0.04,
@@ -132,14 +131,16 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     button: {
-        marginTop: 32,
-        marginBottom: 64,
+        //marginTop: 32,
+        //marginBottom: 64,
         backgroundColor: '#9a9a9a',
         height: height*0.04,
         width: '40%',
-        left: '52%',
-        alignItems: 'center',
-        justifyContent: 'center',
+        right: '8%',
+        marginTop: 5,
+        marginBottom: 20,
+        alignSelf: 'flex-end',
+        //justifyContent: 'center',
         borderRadius: 50,
     },
     buttonTxt: {
@@ -152,23 +153,22 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         height: height*0.08,
         fontSize: height*0.06,
-        marginTop: 12,
-        marginBottom: 25,
-        marginVertical: 20,
+        //marginTop: 12,
+        //marginBottom: 25,
+        //marginVertical: 20,
         textAlign: 'center',
     },
     gradient: {
         width: width*0.9,
-        height: height*0.7,
+        height: '100%',
         borderWidth: 5,
         borderRadius: 15,
         borderStyle: 'solid',
-        borderColor: 'rgba(255,255,255,0.3)',
+        borderColor: 'rgba(255,255,255,0.7)',
     },
     container: {
-        flex: 10,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: '10%',
     }
 });

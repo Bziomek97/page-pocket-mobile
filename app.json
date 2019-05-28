@@ -27,7 +27,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.pk.PagePocket",
-    },
+      "package": "com.pk.PagePocket"
+    }
   }
 }

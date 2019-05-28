@@ -1,9 +1,9 @@
 {
-  "expoServerPort": 8044,
-  "expoServerNgrokUrl": "https://7w-3wy.anonymous.page-pocket-mobile.exp.direct",
-  "packagerNgrokUrl": "https://packager.7w-3wy.anonymous.page-pocket-mobile.exp.direct",
-  "ngrokPid": 1604,
+  "expoServerPort": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "devToolsPort": 19002,
-  "packagerPort": 19001,
-  "packagerPid": 1524
+  "packagerPort": null,
+  "packagerPid": null
 }
